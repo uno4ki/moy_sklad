@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<good readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" archived="true" parentUuid="string" productCode="string" vat="10" minPrice="1.051732E7" uomUuid="string" countryUuid="string" supplierUuid="string" salePrice="1.051732E7" saleCurrencyUuid="string" buyCurrencyUuid="string" isSerialTrackable="true" buyPrice="1.051732E7" minimumBalance="1.051732E7" weight="1.051732E7" volume="1.051732E7">
+  <!--Optional:-->
+  <accountUuid>string</accountUuid>
+  <!--Optional:-->
+  <accountId>string</accountId>
+  <!--Optional:-->
+  <uuid>string</uuid>
+  <!--Optional:-->
+  <groupUuid>string</groupUuid>
+  <!--Optional:-->
+  <deleted>2018-11-01T06:36:46+01:00</deleted>
+  <!--Optional:-->
+  <code>string</code>
+  <!--Optional:-->
+  <externalcode>string</externalcode>
+  <!--Optional:-->
+  <description>string</description>
+  <!--Zero or more repetitions:-->
+  <attribute readMode="ALL" changeMode="NEIGHBOUR" updated="2003-08-09T02:18:37+02:00" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2002-06-24T17:46:32+02:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" goodUuid="string">
+    <!--Optional:-->
+    <accountUuid>string</accountUuid>
+    <!--Optional:-->
+    <accountId>string</accountId>
+    <!--Optional:-->
+    <uuid>string</uuid>
+    <!--Optional:-->
+    <groupUuid>string</groupUuid>
+    <!--Optional:-->
+    <deleted>2016-02-20T15:56:29+01:00</deleted>
+    <!--Optional:-->
+    <file readMode="NONE" changeMode="ALL" updated="2018-12-28T20:51:14+01:00" updatedBy="string" name="string" created="2017-11-01T09:15:53+01:00" filename="string" miniatureUuid="string">
+      <!--Optional:-->
+      <accountUuid>string</accountUuid>
+      <!--Optional:-->
+      <accountId>string</accountId>
+      <!--Optional:-->
+      <uuid>string</uuid>
+      <!--Optional:-->
+      <groupUuid>string</groupUuid>
+      <!--Optional:-->
+      <deleted>2014-06-10T20:33:25+02:00</deleted>
+      <!--Optional:-->
+      <code>string</code>
+      <!--Optional:-->
+      <externalcode>string</externalcode>
+      <!--Optional:-->
+      <description>string</description>
+      <!--Optional:-->
+      <contents>c3BlbHVuY2lz</contents>
+    </file>
+  </attribute>
+  <!--Zero or more repetitions:-->
+  <barcode readMode="NEIGHBOUR" changeMode="NONE" barcode="string" barcodeType="EAN8">
+    <!--Optional:-->
+    <accountUuid>string</accountUuid>
+    <!--Optional:-->
+    <accountId>string</accountId>
+    <!--Optional:-->
+    <uuid>string</uuid>
+    <!--Optional:-->
+    <groupUuid>string</groupUuid>
+  </barcode>
+  <!--Optional:-->
+  <salePrices>
+    <!--Zero or more repetitions:-->
+    <price readMode="NONE" changeMode="NONE" currencyUuid="string" priceTypeUuid="string" value="1.051732E7">
+      <!--Optional:-->
+      <accountUuid>string</accountUuid>
+      <!--Optional:-->
+      <accountId>string</accountId>
+      <!--Optional:-->
+      <uuid>string</uuid>
+      <!--Optional:-->
+      <groupUuid>string</groupUuid>
+    </price>
+  </salePrices>
+  <!--Zero or more repetitions:-->
+  <pack readMode="ALL" changeMode="NONE" quantity="1.051732E7" uomUuid="string">
+    <!--Optional:-->
+    <accountUuid>string</accountUuid>
+    <!--Optional:-->
+    <accountId>string</accountId>
+    <!--Optional:-->
+    <uuid>string</uuid>
+    <!--Optional:-->
+    <groupUuid>string</groupUuid>
+  </pack>
+  <!--Optional:-->
+  <preferences>
+    <!--Zero or more repetitions:-->
+    <preference readMode="NONE" changeMode="PARENT" slotUuid="string">
+      <!--Optional:-->
+      <accountUuid>string</accountUuid>
+      <!--Optional:-->
+      <accountId>string</accountId>
+      <!--Optional:-->
+      <uuid>string</uuid>
+      <!--Optional:-->
+      <groupUuid>string</groupUuid>
+    </preference>
+  </preferences>
+  <!--Optional:-->
+  <images>
+    <!--Zero or more repetitions:-->
+    <image readMode="PARENT" changeMode="PARENT" updated="2000-01-06T22:03:12" updatedBy="string" name="string" created="2017-08-18T22:01:40" filename="string" miniatureUuid="string" tinyUuid="string">
+      <!--Optional:-->
+      <accountUuid>string</accountUuid>
+      <!--Optional:-->
+      <accountId>string</accountId>
+      <!--Optional:-->
+      <uuid>string</uuid>
+      <!--Optional:-->
+      <groupUuid>string</groupUuid>
+      <!--Optional:-->
+      <deleted>2016-09-11T23:45:33</deleted>
+      <!--Optional:-->
+      <code>string</code>
+      <!--Optional:-->
+      <externalcode>string</externalcode>
+      <!--Optional:-->
+      <description>string</description>
+      <!--Optional:-->
+      <contents>c2NpcmV0</contents>
+    </image>
+  </images>
+</good>

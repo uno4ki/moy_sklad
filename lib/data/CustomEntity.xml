@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<customEntity readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" entityMetadataUuid="string">
+  <!--Optional:-->
+  <accountUuid>string</accountUuid>
+  <!--Optional:-->
+  <accountId>string</accountId>
+  <!--Optional:-->
+  <uuid>string</uuid>
+  <!--Optional:-->
+  <groupUuid>string</groupUuid>
+  <!--Optional:-->
+  <deleted>2014-06-09T17:15:04+02:00</deleted>
+  <!--Optional:-->
+  <code>string</code>
+  <!--Optional:-->
+  <externalcode>string</externalcode>
+  <!--Optional:-->
+  <description>string</description>
+  <!--Zero or more repetitions:-->
+  <attribute readMode="NEIGHBOUR" changeMode="NEIGHBOUR" updated="2013-05-22T03:02:49+02:00" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="true" timeValue="2013-12-21T12:32:42+01:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" customEntityUuid="string">
+    <!--Optional:-->
+    <accountUuid>string</accountUuid>
+    <!--Optional:-->
+    <accountId>string</accountId>
+    <!--Optional:-->
+    <uuid>string</uuid>
+    <!--Optional:-->
+    <groupUuid>string</groupUuid>
+    <!--Optional:-->
+    <deleted>2016-01-01T20:07:42</deleted>
+    <!--Optional:-->
+    <file readMode="SELF" changeMode="PARENT" updated="2019-08-19T16:35:10" updatedBy="string" name="string" created="2018-02-04T15:35:59+01:00" filename="string" miniatureUuid="string">
+      <!--Optional:-->
+      <accountUuid>string</accountUuid>
+      <!--Optional:-->
+      <accountId>string</accountId>
+      <!--Optional:-->
+      <uuid>string</uuid>
+      <!--Optional:-->
+      <groupUuid>string</groupUuid>
+      <!--Optional:-->
+      <deleted>2002-11-16T10:03:57+01:00</deleted>
+      <!--Optional:-->
+      <code>string</code>
+      <!--Optional:-->
+      <externalcode>string</externalcode>
+      <!--Optional:-->
+      <description>string</description>
+      <!--Optional:-->
+      <contents>YWM=</contents>
+    </file>
+  </attribute>
+</customEntity>
