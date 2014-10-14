@@ -2,6 +2,10 @@
 
 require 'spec_helper'
 
+PRICE_OLD = "131c74fb-1ee5-11e4-a138-002590a28eca"
+PRICE_CUR = "bb7ec375-4ace-11e4-90a2-8eca001baadc"
+PRICE_GRP = "9b0523cc-4ad0-11e4-90a2-8eca001c15b8"
+
 describe 'Good type' do
 
   describe :index do
@@ -67,6 +71,31 @@ describe 'Good type' do
       item.destroy
 
       expect{Moysklad::Models::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+    end
+
+    it "should create item with salePrice" do
+      item = Moysklad::Models::Good.new
+      item.name = "Test item with custom prices"
+
+      item.setSalePrice(PRICE_OLD, 155)
+      item.setSalePrice(PRICE_CUR, 255)
+      item.setSalePrice(PRICE_GRP, 355)
+
+      item.save
+
+      uuid = item.uuid
+
+      item = Moysklad::Models::Good.find(uuid)
+
+      item.name = "Foo Bar - test"
+      item.setSalePrice(PRICE_OLD, 1000)
+      item.setSalePrice(PRICE_CUR, 2000)
+      item.setSalePrice(PRICE_GRP, 3000)
+      item.save
+
+      expect(item.getSalePrice(PRICE_OLD).value.to_f / 100).to eq(1000)
+
+      item.destroy
     end
   end
 

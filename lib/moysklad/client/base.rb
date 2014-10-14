@@ -39,6 +39,24 @@ module Moysklad::Client
 
     end
 
+    # Override create method, this required because moysklad uses PUT instead of POST
+    def create
+      run_callbacks :create do
+        connection.put(new_element_path, encode, self.class.headers).tap do |response|
+          self.id = id_from_response(response)
+          load_attributes_from_response(response)
+        end
+      end
+    end
+
+    def destroy
+      run_callbacks :destroy do
+        connection.delete(self.class.element_path(uuid), self.class.headers)
+      end
+    end
+
+    private
+
     # Custom data encoder
     # Template compiled only ONCE !!!
     def encode
@@ -60,20 +78,5 @@ module Moysklad::Client
       create_xml
     end
 
-    # Override create method, this required because moysklad uses PUT instead of POST
-    def create
-      run_callbacks :create do
-        connection.put(new_element_path, encode, self.class.headers).tap do |response|
-          self.id = id_from_response(response)
-          load_attributes_from_response(response)
-        end
-      end
-    end
-
-    def destroy
-      run_callbacks :destroy do
-        connection.delete(self.class.element_path(uuid), self.class.headers)
-      end
-    end
   end
 end
