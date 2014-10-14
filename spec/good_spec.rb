@@ -67,7 +67,6 @@ describe 'Good type' do
       item.destroy
 
       expect{Moysklad::Models::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
-
     end
   end
 

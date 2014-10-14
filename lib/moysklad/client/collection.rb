@@ -12,6 +12,7 @@ module Moysklad::Client
     def initialize(data)
 
       @elements = data[:data]['collection'].delete(data[:object])
+      @elements = [@elements] if @elements.is_a?(Hash)
       @metadata = HashWithIndifferentAccess.new(data[:data]['collection'])
 
       # Fix keys
