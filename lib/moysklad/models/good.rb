@@ -18,20 +18,5 @@ module Moysklad::Models
       create_nested_collection(:salePrices)
       self.salePrices.get_attribute(:price, :priceTypeUuid, uuid)
     end
-
-    def setAttribute(info, value)
-      v = get_attribute(:attribute, :metadataUuid, info[:uuid])
-      if v.nil?
-        data = {metadataUuid: info[:uuid]}
-        data["value#{info[:type].to_s.capitalize}".to_sym] = value
-        self.attribute << create_and_load_resource("Attribute", data)
-      else
-        v.send("value#{info[:type].to_s.capitalize}=".to_sym, value)
-      end
-    end
-
-    def getAttribute(uuid)
-      get_attribute(:attribute, :metadataUuid, uuid)
-    end
   end
 end
