@@ -76,17 +76,13 @@ describe 'Good type' do
 
     describe "should create item with salePrice and able to update only default" do
 
-      PRICE_OLD = "131c74fb-1ee5-11e4-a138-002590a28eca"
-      PRICE_CUR = "bb7ec375-4ace-11e4-90a2-8eca001baadc"
-      PRICE_GRP = "9b0523cc-4ad0-11e4-90a2-8eca001c15b8"
+      PRICE_CUR = "131c74fb-1ee5-11e4-a138-002590a28eca"
 
       before(:all) do
         item = Moysklad::Models::Good.new
         item.name = "Test item with custom prices"
 
-        item.setSalePrice(PRICE_OLD, 100)
-        item.setSalePrice(PRICE_CUR, 200)
-        item.setSalePrice(PRICE_GRP, 300)
+        item.setSalePrice(PRICE_CUR, 100)
 
         item.save
         @uuid = item.uuid
@@ -98,21 +94,16 @@ describe 'Good type' do
 
       it "and get price" do
         item = Moysklad::Models::Good.find(@uuid)
-
-        expect(item.getSalePrice(PRICE_OLD)).to eq(100)
-        expect(item.getSalePrice(PRICE_CUR)).to eq(200)
-        expect(item.getSalePrice(PRICE_GRP)).to eq(300)
+        expect(item.getSalePrice(PRICE_CUR).value.to_f / 100).to eq(100)
       end
 
       it "and update CUR price (only default price can be updated)" do
         item = Moysklad::Models::Good.find(@uuid)
 
-        item.setSalePrice(PRICE_OLD, 1000)
-        item.setSalePrice(PRICE_CUR, 2000)
+        item.setSalePrice(PRICE_CUR, 1000)
         expect(item.save).to eq(true)
 
-        expect(item.getSalePrice(PRICE_OLD)).to eq(1000)
-        expect(item.getSalePrice(PRICE_CUR)).to eq(200)
+        expect(item.getSalePrice(PRICE_CUR).value.to_f / 100).to eq(1000)
       end
     end
 

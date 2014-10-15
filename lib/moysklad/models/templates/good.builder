@@ -14,7 +14,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
   xml.externalcode_ externalcode
   xml.description_  description
 
-  attribute.each_value do |a|
+  attribute.each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -54,7 +54,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
   }
 
   xml.salePrices {
-    salePrices.price.each_value do |p|
+    salePrices.price.each do |p|
       xml.price(readMode: p.readMode, changeMode: p.changeMode, currencyUuid: p.currencyUuid, priceTypeUuid: p.priceTypeUuid, value: p.value) {
         xml.accountUuid_  p.accountUuid
         xml.accountId_    p.accountId
@@ -64,7 +64,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
     end if !salePrices.is_a?(::Moysklad::Client::Attribute::MissingAttr)
   }
 
-  pack.each_value do |p|
+  pack.each do |p|
     xml.pack(readMode: p.readMode, changeMode: p.changeMode, quantity: p.quantity, uomUuid: p.uomUuid) {
       xml.accountUuid_  p.accountUuid
       xml.accountId_    p.accountId
@@ -74,7 +74,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
   end if !pack.is_a?(::Moysklad::Client::Attribute::MissingAttr)
 
   xml.preferences {
-    preference.each_value do |p|
+    preference.each do |p|
       xml.preference(readMode: p.readMode, changeMode: p.changeMode, slotUuid: p.slotUuid) {
         xml.accountUuid_  p.accountUuid
         xml.accountId_    p.accountId

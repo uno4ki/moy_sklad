@@ -6,17 +6,17 @@ module Moysklad::Models
 
       v = self.salePrices.get_attribute(:price, :priceTypeUuid, type)
       if v.nil?
-        self.salePrices.price[type] = create_and_load_resource("Price", {
-                              currencyUuid: Moysklad.currency, priceTypeUuid: type, value: value * 100
+        self.salePrices.price << create_and_load_resource("Price", {
+                              currencyUuid: Moysklad.currency, priceTypeUuid: type, value: value.to_f * 100
                             })
       else
-        v.value = value * 100
+        v.value = value.to_f * 100
       end
     end
 
     def getSalePrice(uuid)
       create_nested_collection(:salePrices)
-      (self.salePrices.get_attribute(:price, :priceTypeUuid, uuid).value.to_f / 100).round(2)
+      self.salePrices.get_attribute(:price, :priceTypeUuid, uuid)
     end
 
     def setAttribute(info, value)
@@ -24,7 +24,7 @@ module Moysklad::Models
       if v.nil?
         data = {metadataUuid: info[:uuid]}
         data["value#{info[:type].to_s.capitalize}".to_sym] = value
-        self.attribute[info[:uuid]] = create_and_load_resource("Attribute", data)
+        self.attribute << create_and_load_resource("Attribute", data)
       else
         v.send("value#{info[:type].to_s.capitalize}=".to_sym, value)
       end
