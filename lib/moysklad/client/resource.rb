@@ -3,6 +3,8 @@ module ActiveResource
   class Base
 
     def get_attribute(name, type, key)
+      return nil if self.send(name).is_a?(Moysklad::Client::Attribute::MissingAttr)
+
       create_nested_resource(name)
 
       # Convert single attr to array
@@ -36,7 +38,7 @@ module ActiveResource
       name = name.to_s
       if !known_attributes.include?(name)
         self.known_attributes << name
-        self.attributes[name] = collection ? create_and_load_resource(name) : []
+        self.attributes[name] = collection ? [] : create_and_load_resource(name)
       end
 
     end

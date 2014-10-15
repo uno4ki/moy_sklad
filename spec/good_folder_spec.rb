@@ -1,7 +1,6 @@
 # coding: utf-8
 
 require 'spec_helper'
-require 'securerandom'
 
 describe 'GoodFolder' do
 
@@ -25,6 +24,7 @@ describe 'GoodFolder' do
       folder = Moysklad::Models::GoodFolder.new
       folder.name = "Test folder"
       expect(folder.save).to eq(true)
+      expect(folder.uuid.length).to eq(36)
       folder.destroy
     end
 

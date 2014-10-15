@@ -33,7 +33,12 @@ module Moysklad::Client
       if v.nil?
         data = {metadataUuid: info[:uuid]}
         data["value#{info[:type].to_s.capitalize}".to_sym] = value
-        self.attribute << create_and_load_resource("Attribute", data)
+        a = create_and_load_resource("Attribute", data)
+        if self.attribute.is_a?(Moysklad::Client::Attribute::MissingAttr)
+          self.attribute = [a]
+        else
+          self.attribute << a
+        end
       else
         v.send("value#{info[:type].to_s.capitalize}=".to_sym, value)
       end
