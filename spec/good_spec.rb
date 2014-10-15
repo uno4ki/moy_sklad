@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'securerandom'
 
-describe 'Good type' do
+describe 'Good' do
 
   describe :index do
     it "should return list of items" do

@@ -14,9 +14,9 @@ module Moysklad::Client
       data = Hash.from_xml(_data)
 
       if data.has_key?('collection')
-        {data: data, object: element_name.downcase}
+        {data: data, object: element_name[0].downcase + element_name[1..-1]}
       else
-        data
+        {data.keys.first.underscore => data.values.first}
       end
     end
   end
