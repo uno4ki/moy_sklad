@@ -83,21 +83,4 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
       }
     end if !preference.is_a?(::Moysklad::Client::Attribute::MissingAttr)
   }
-
-  xml.images {
-    images.each_value do |i|
-      xml.image(readMode: i.readMode, changeMode: i.changeMode, updated: i.updated, updatedBy: i.updatedBy,
-                name: i.name, created: i.created, filename: i.filename, miniatureUuid: i.miniatureUuid, tinyUuid: i.tinyUuid) {
-        xml.accountUuid_  i.accountUuid
-        xml.accountId_    i.accountId
-        xml.uuid_         i.uuid
-        xml.groupUuid_    i.groupUuid
-        xml.deleted_      i.deleted
-        xml.code_         i.code
-        xml.externalcode_ i.externalcode
-        xml.description_  i.description
-        xml.contents_     i.contents
-      }
-    end if !images.is_a?(::Moysklad::Client::Attribute::MissingAttr)
-  } if !images.nil?
 }

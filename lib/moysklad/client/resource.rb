@@ -2,6 +2,17 @@
 module ActiveResource
   class Base
 
+    def get_attribute(name, type, key)
+      create_nested_resource(name)
+
+      self.send(name).each_value do |v|
+        return v if v.send(type) == key
+      end
+      nil
+    end
+
+    private
+
     # Construct nested resource class and load with given attributes
     # NB: ALL nested classes should be created through this way.
     def create_and_load_resource(name, attributes = nil)
@@ -17,8 +28,6 @@ module ActiveResource
     def create_nested_resource(name)
       create_nested_collection_or_resource(name, false)
     end
-
-    private
 
     def create_nested_collection_or_resource(name, collection = true)
       name = name.to_s

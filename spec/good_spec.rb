@@ -1,10 +1,7 @@
 # coding: utf-8
 
 require 'spec_helper'
-
-PRICE_OLD = "131c74fb-1ee5-11e4-a138-002590a28eca"
-PRICE_CUR = "bb7ec375-4ace-11e4-90a2-8eca001baadc"
-PRICE_GRP = "9b0523cc-4ad0-11e4-90a2-8eca001c15b8"
+require 'securerandom'
 
 describe 'Good type' do
 
@@ -29,35 +26,39 @@ describe 'Good type' do
     end
   end
 
-  describe :update do
-    it "should update item with uuid 05eca138-3da6-11e4-0135-002590a28eca" do
-      item = Moysklad::Models::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
-      expect(item.buyPrice).to eq("0.0")
-      item.buyPrice = "100.99"
+  describe "Simple attribute update" do
+    before(:all) do
+      item = Moysklad::Models::Good.new
+      item.name = "Simple test item for attr update test"
       item.save
+      @uuid = item.uuid
+      @randomPrice = rand(1.0..100.0).round(2)
+    end
 
-      item = Moysklad::Models::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
-      expect(item.buyPrice).to eq("100.99")
-      item.buyPrice = "0.0"
-      item.save
+    after(:all) do
+      Moysklad::Models::Good.find(@uuid).destroy
+    end
 
-      item = Moysklad::Models::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
+    it "and update attr" do
+      item = Moysklad::Models::Good.find(@uuid)
       expect(item.buyPrice).to eq("0.0")
-      expect(item.name).to eq("СТОЛИК КОКТЕЙЛЬНЫЙ ST.JAMES")
-      item.buyPrice = "0.0"
-      item.save
+      item.buyPrice = @randomPrice
+      expect(item.save).to eq(true)
+    end
+
+    it "and read attr" do
+      item = Moysklad::Models::Good.find(@uuid)
+      expect(item.buyPrice.to_f).to eq(@randomPrice)
     end
   end
 
-  describe :create do
+  describe "create and update" do
+
     it "should create a new Good" do
       item = Moysklad::Models::Good.new
       item.name = "Just a test item, с русскими букавами in da name"
       item.description = "Отличный итем, шерстянной такой"
-      item.externalcode = 'foo-bar-ext'
-      item.code = 'foo-code'
-      item.bullshit = 'xxx'
-      item.save
+      expect(item.save).to eq(true)
 
       expect(item.uuid.length).to eq(36) # Should looks like real uuid
 
@@ -73,29 +74,93 @@ describe 'Good type' do
       expect{Moysklad::Models::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
 
-    it "should create item with salePrice" do
-      item = Moysklad::Models::Good.new
-      item.name = "Test item with custom prices"
+    describe "should create item with salePrice and able to update only default" do
 
-      item.setSalePrice(PRICE_OLD, 155)
-      item.setSalePrice(PRICE_CUR, 255)
-      item.setSalePrice(PRICE_GRP, 355)
+      PRICE_OLD = "131c74fb-1ee5-11e4-a138-002590a28eca"
+      PRICE_CUR = "bb7ec375-4ace-11e4-90a2-8eca001baadc"
+      PRICE_GRP = "9b0523cc-4ad0-11e4-90a2-8eca001c15b8"
 
-      item.save
+      before(:all) do
+        item = Moysklad::Models::Good.new
+        item.name = "Test item with custom prices"
 
-      uuid = item.uuid
+        item.setSalePrice(PRICE_OLD, 100)
+        item.setSalePrice(PRICE_CUR, 200)
+        item.setSalePrice(PRICE_GRP, 300)
 
-      item = Moysklad::Models::Good.find(uuid)
+        item.save
+        @uuid = item.uuid
+      end
 
-      item.name = "Foo Bar - test"
-      item.setSalePrice(PRICE_OLD, 1000)
-      item.setSalePrice(PRICE_CUR, 2000)
-      item.setSalePrice(PRICE_GRP, 3000)
-      item.save
+      after(:all) do
+        Moysklad::Models::Good.find(@uuid).destroy
+      end
 
-      expect(item.getSalePrice(PRICE_OLD).value.to_f / 100).to eq(1000)
+      it "and get price" do
+        item = Moysklad::Models::Good.find(@uuid)
 
-      item.destroy
+        expect(item.getSalePrice(PRICE_OLD)).to eq(100)
+        expect(item.getSalePrice(PRICE_CUR)).to eq(200)
+        expect(item.getSalePrice(PRICE_GRP)).to eq(300)
+      end
+
+      it "and update CUR price (only default price can be updated)" do
+        item = Moysklad::Models::Good.find(@uuid)
+
+        item.setSalePrice(PRICE_OLD, 1000)
+        item.setSalePrice(PRICE_CUR, 2000)
+        expect(item.save).to eq(true)
+
+        expect(item.getSalePrice(PRICE_OLD)).to eq(1000)
+        expect(item.getSalePrice(PRICE_CUR)).to eq(200)
+      end
+    end
+
+
+    describe "item with custom attributes" do
+
+      META_COUNTRY  = {uuid: "9bdf2792-2c52-11e4-ea35-002590a28eca", type: :string}
+      META_ARTNO    = {uuid: "eb396242-1efe-11e4-d971-002590a28eca", type: :string}
+      META_LINK     = {uuid: "51e20842-22eb-11e4-a5c3-002590a28eca", type: :text}
+
+      let(:partno)  { SecureRandom.hex }
+      let(:country) { SecureRandom.hex }
+      let(:link)    { SecureRandom.hex }
+
+      before(:all) do
+        item = Moysklad::Models::Good.new
+        item.name = "Test item with custom attributes"
+        item.save
+        @uuid = item.uuid
+      end
+
+      after(:all) do
+        Moysklad::Models::Good.find(@uuid).destroy
+      end
+
+      it "should test empty attrs" do
+        item = Moysklad::Models::Good.find(@uuid)
+
+        expect(item.getAttribute(META_LINK[:uuid])).to be_nil
+        expect(item.getAttribute(META_ARTNO[:uuid])).to be_nil
+        expect(item.getAttribute(META_COUNTRY[:uuid])).to be_nil
+      end
+
+      it "set and read attrs" do
+        item = Moysklad::Models::Good.find(@uuid)
+
+        item.setAttribute(META_COUNTRY, country)
+        item.setAttribute(META_LINK, link)
+        item.setAttribute(META_ARTNO, partno)
+
+        expect(item.save).to eq(true)
+
+        item = Moysklad::Models::Good.find(@uuid)
+        expect(item.getAttribute(META_LINK[:uuid]).valueText).to eq(link)
+        expect(item.getAttribute(META_ARTNO[:uuid]).valueString).to eq(partno)
+        expect(item.getAttribute(META_COUNTRY[:uuid]).valueString).to eq(country)
+      end
+
     end
   end
 
