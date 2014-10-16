@@ -119,7 +119,9 @@ describe 'CustomerOrder' do
         order.sum.sumInCurrency = "100"
 
         KNOWN_ITEMS.each do |id, info|
-          order.addItem(id, {quantity: info[:quantity], basePrice: { sum: info[:price] * 100, sumInCurrency: info[:price] * 100}})
+          order.addItem(id, {quantity: info[:quantity],
+              basePrice: { sum: info[:price] * 100, sumInCurrency: info[:price] * 100},
+              price: { sum: info[:price] * 100, sumInCurrency: info[:price] * 100}})
         end
 
         ORDER_OPTIONS.each do |type, opt|
@@ -142,8 +144,8 @@ describe 'CustomerOrder' do
         end
 
         # This is NORMAL, order sum is always zero :D
-        expect(order.sum.sum).to eq("0.0")
-        expect(order.sum.sumInCurrency).to eq("0.0")
+        expect(order.sum.sum).to eq("4.744008E7")
+        expect(order.sum.sumInCurrency).to eq("4.744008E7")
 
         expect(order.customerOrderPosition.length).to eq(KNOWN_ITEMS.keys.length)
         customer = Moysklad::Models::Company.find(order.sourceAgentUuid)
