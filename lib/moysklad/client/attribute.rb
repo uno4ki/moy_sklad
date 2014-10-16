@@ -32,21 +32,30 @@ module Moysklad::Client
       v = get_attribute(:attribute, :metadataUuid, info[:uuid])
       if v.nil?
         data = {metadataUuid: info[:uuid]}
-        data["value#{info[:type].to_s.capitalize}".to_sym] = value
+        data[info[:value]] = value
         a = create_and_load_resource("Attribute", data)
-        if self.attribute.is_a?(Moysklad::Client::Attribute::MissingAttr)
+        if self.getArray(:attribute).empty?
           self.attribute = [a]
         else
           self.attribute << a
         end
       else
-        v.send("value#{info[:type].to_s.capitalize}=".to_sym, value)
+        v.send("#{info[:value]}=".to_sym, value)
       end
     end
 
     def getAttribute(uuid)
       get_attribute(:attribute, :metadataUuid, uuid)
     end
+
+    def getArray(type)
+      return [] if self.send(type).is_a?(Moysklad::Client::Attribute::MissingAttr)
+
+      # Convert
+      self.send("#{type}=", [self.send(type)]) if !self.send(type).is_a?(Array)
+      self.send(type)
+    end
+
   end
 
   ActiveResource::Base.send(:include, MissingAttrHandler)

@@ -110,9 +110,9 @@ describe 'Good' do
 
     describe "item with custom attributes" do
 
-      META_COUNTRY  = {uuid: "9bdf2792-2c52-11e4-ea35-002590a28eca", type: :string}
-      META_ARTNO    = {uuid: "eb396242-1efe-11e4-d971-002590a28eca", type: :string}
-      META_LINK     = {uuid: "51e20842-22eb-11e4-a5c3-002590a28eca", type: :text}
+      META_COUNTRY  = {uuid: "9bdf2792-2c52-11e4-ea35-002590a28eca", value: :valueString}
+      META_ARTNO    = {uuid: "eb396242-1efe-11e4-d971-002590a28eca", value: :valueString}
+      META_LINK     = {uuid: "51e20842-22eb-11e4-a5c3-002590a28eca", value: :valueText}
 
       let(:partno)  { SecureRandom.hex }
       let(:country) { SecureRandom.hex }
