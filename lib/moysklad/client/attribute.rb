@@ -49,10 +49,11 @@ module Moysklad::Client
     end
 
     def getArray(type)
-      return [] if self.send(type).is_a?(Moysklad::Client::Attribute::MissingAttr)
+      value = self.send(type)
+      return [] if value.nil? or value.is_a?(Moysklad::Client::Attribute::MissingAttr)
 
       # Convert
-      self.send("#{type}=", [self.send(type)]) if !self.send(type).is_a?(Array)
+      self.send("#{type}=", [value]) if !value.is_a?(Array)
       self.send(type)
     end
 

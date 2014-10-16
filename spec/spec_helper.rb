@@ -1,4 +1,5 @@
 require 'rspec'
+require 'ms_config.rb'
 require 'moysklad/configuration'
 
 Moysklad.config do
