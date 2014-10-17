@@ -55,6 +55,11 @@ module Moysklad::Client
       end
     end
 
+    def save
+      super
+      self.error.is_a?(Moysklad::Client::Attribute::MissingAttr)
+    end
+
     private
 
     # Custom data encoder

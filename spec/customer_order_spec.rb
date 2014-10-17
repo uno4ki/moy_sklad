@@ -16,6 +16,10 @@ describe 'CustomerOrder' do
       # Don't check ALL orders, only 5 or less
       orders.to_a.sample(sample).each do |o|
         cost = 0
+
+        ## We have "bad" order in test DB, just skip them
+        next if o.sourceAgentUuid.is_a?(Moysklad::Client::Attribute::MissingAttr)
+
         expect(o.sourceAgentUuid.length).to eq(36) # uuid
 
         customer = Moysklad::Models::Company.find(o.sourceAgentUuid)
