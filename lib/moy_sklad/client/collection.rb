@@ -5,9 +5,14 @@ require 'active_support/core_ext/hash/conversions'
 require 'active_support/core_ext/hash/indifferent_access'
 
 module MoySklad::Client
-  class Collection < ActiveResource::Collection
+  class Collection
+    include Enumerable
+
+    delegate :collect, :each, :length, :to => :to_a
 
     attr_reader :metadata
+
+    attr_accessor :elements
 
     def initialize(data)
 
@@ -20,5 +25,19 @@ module MoySklad::Client
         @metadata[k] = @metadata[k].to_i if @metadata.has_key?(k)
       end
     end
+
+    def to_a
+      @elements
+    end
+
+    def collect!
+      return @elements unless block_given?
+      set = []
+      each { |o| set << yield(o) }
+      @elements = set
+      self
+    end
+
+    alias map! collect!
   end
 end

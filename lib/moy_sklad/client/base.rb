@@ -8,8 +8,6 @@ module MoySklad::Client
     self.user = MoySklad.configuration.user_name
     self.password = MoySklad.configuration.password
     self.auth_type = :basic
-    self.include_format_in_path = false
-    self.collection_parser = Collection
 
     @@template_path = File.join(File.dirname(__FILE__), '..', 'models', 'templates')
 
@@ -38,22 +36,26 @@ module MoySklad::Client
         @collection_name ||= "#{element_name.classify}/list"
       end
 
+      def collection_path(prefix_options = {}, query_options = nil)
+        check_prefix_options(prefix_options)
+        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
+        "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
+      end
+
+
+
     end
 
     # Override create method, this required because moysklad uses PUT instead of POST
     def create
-      run_callbacks :create do
-        connection.put(new_element_path, encode, self.class.headers).tap do |response|
-          self.id = id_from_response(response)
-          load_attributes_from_response(response)
-        end
+      connection.put(new_element_path, encode, self.class.headers).tap do |response|
+        self.id = id_from_response(response)
+        load_attributes_from_response(response)
       end
     end
 
     def destroy
-      run_callbacks :destroy do
-        connection.delete(self.class.element_path(uuid), self.class.headers)
-      end
+      connection.delete(self.class.element_path(uuid), self.class.headers)
     end
 
     def save
