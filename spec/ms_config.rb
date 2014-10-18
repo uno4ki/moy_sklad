@@ -29,3 +29,8 @@ ORDER_OPTIONS = {
 }
 
 CONFIRMED_UUID = "a7f2f9ea-2c5f-11e4-314c-002590a28eca"
+
+CUSTOM_DICT = {
+  delivery_method: "5fbf4a62-21ee-11e4-ef5c-002590a28eca",
+  payment_method: "bc728703-21ee-11e4-0a27-002590a28eca"
+}
