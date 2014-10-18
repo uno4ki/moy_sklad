@@ -14,9 +14,23 @@ module MoySklad::Client
       data = Hash.from_xml(_data)
 
       if data.has_key?('collection')
-        MoySklad::Client::Collection.new({data: data, object: element_name[0].downcase + element_name[1..-1]})
+        collection(data)
       else
         {data.keys.first.underscore => data.values.first}
+      end
+    end
+
+    def _data(data)
+      { data: data, object: element_name[0].downcase + element_name[1..-1] }
+    end
+
+    if ActiveResource::VERSION::STRING < '4.0.0'
+      def collection(data)
+        MoySklad::Client::Collection.new(_data(data))
+      end
+    else
+      def collection(data)
+        _data(data)
       end
     end
   end

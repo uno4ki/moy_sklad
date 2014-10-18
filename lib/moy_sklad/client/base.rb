@@ -9,6 +9,11 @@ module MoySklad::Client
     self.password = MoySklad.configuration.password
     self.auth_type = :basic
 
+    if ActiveResource::VERSION::STRING >= '4.0.0'
+      self.include_format_in_path = false
+      self.collection_parser = Collection
+    end
+
     @@template_path = File.join(File.dirname(__FILE__), '..', 'models', 'templates')
 
     class << self
@@ -36,26 +41,32 @@ module MoySklad::Client
         @collection_name ||= "#{element_name.classify}/list"
       end
 
-      def collection_path(prefix_options = {}, query_options = nil)
-        check_prefix_options(prefix_options)
-        prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
+      if ActiveResource::VERSION::STRING < '4.0.0'
+        def collection_path(prefix_options = {}, query_options = nil)
+          check_prefix_options(prefix_options)
+          prefix_options, query_options = split_options(prefix_options) if query_options.nil?
+          "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
+        end
       end
-
-
-
     end
 
     # Override create method, this required because moysklad uses PUT instead of POST
-    def create
-      connection.put(new_element_path, encode, self.class.headers).tap do |response|
-        self.id = id_from_response(response)
-        load_attributes_from_response(response)
+    if ActiveResource::VERSION::STRING < '4.0.0'
+      def create
+        _create
       end
-    end
 
-    def destroy
-      connection.delete(self.class.element_path(uuid), self.class.headers)
+      def destroy
+        _desroy
+      end
+    else
+      def create
+        run_callbacks :create do _create end
+      end
+
+      def destroy
+        run_callbacks :destroy do _desroy end
+      end
     end
 
     def save
@@ -64,6 +75,17 @@ module MoySklad::Client
     end
 
     private
+
+    def _create
+      connection.put(new_element_path, encode, self.class.headers).tap do |response|
+        self.id = id_from_response(response)
+        load_attributes_from_response(response)
+      end
+    end
+
+    def _destroy
+      connection.delete(self.class.element_path(uuid), self.class.headers)
+    end
 
     # Custom data encoder
     # Template compiled only ONCE !!!
