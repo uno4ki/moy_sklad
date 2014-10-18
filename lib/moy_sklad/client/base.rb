@@ -65,7 +65,7 @@ module MoySklad::Client
       end
 
       def destroy
-        run_callbacks :destroy do _desroy end
+        run_callbacks :destroy do _destroy end
       end
     end
 
