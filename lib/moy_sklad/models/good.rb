@@ -5,7 +5,7 @@ module MoySklad::Models
 
       v = self.salePrices.find_object(:price, :priceTypeUuid, type)
       if v.nil?
-        create_price(type,value)
+        create_price(type, value)
       else
         v.value = value.to_f * 100
       end
