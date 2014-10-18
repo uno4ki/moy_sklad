@@ -3,7 +3,7 @@ module MoySklad::Models
     def set_sale_price(type, value)
       create_nested_resource(:salePrices)
 
-      v = self.salePrices.get_attribute(:price, :priceTypeUuid, type)
+      v = self.salePrices.find_object(:price, :priceTypeUuid, type)
       if v.nil?
         create_price(type,value)
       else
@@ -13,7 +13,7 @@ module MoySklad::Models
 
     def get_sale_price(uuid)
       create_nested_resource(:salePrices)
-      self.salePrices.get_attribute(:price, :priceTypeUuid, uuid)
+      self.salePrices.find_object(:price, :priceTypeUuid, uuid)
     end
 
     private

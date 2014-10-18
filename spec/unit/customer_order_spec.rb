@@ -97,7 +97,7 @@ describe 'CustomerOrder' do
         end
 
         ORDER_OPTIONS.each do |type, opt|
-          order.setAttribute({uuid: opt[:key], value: :entityValueUuid}, opt[:value])
+          order.set_attribute({uuid: opt[:key], value: :entityValueUuid}, opt[:value])
         end
 
         expect(order.save).to eq(true)
@@ -112,7 +112,7 @@ describe 'CustomerOrder' do
         expect(order.stateUuid).to eq(CONFIRMED_UUID)
 
         ORDER_OPTIONS.each do |type, opt|
-          expect(order.getAttribute(opt[:key]).entityValueUuid).to eq(opt[:value])
+          expect(order.get_attribute(opt[:key]).entityValueUuid).to eq(opt[:value])
         end
 
         # This is NORMAL, order sum is always zero :D

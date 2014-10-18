@@ -132,24 +132,25 @@ describe 'Good' do
       it "should test empty attrs" do
         item = MoySklad::Models::Good.find(@uuid)
 
-        expect(item.getAttribute(META_LINK[:uuid])).to be_nil
-        expect(item.getAttribute(META_ARTNO[:uuid])).to be_nil
-        expect(item.getAttribute(META_COUNTRY[:uuid])).to be_nil
+        expect(item.get_attribute(META_LINK[:uuid])).to be_nil
+        expect(item.get_attribute(META_ARTNO)).to be_nil
+        expect(item.get_attribute(META_COUNTRY)).to be_nil
+        expect{item.get_attribute("foo")}.to raise_error(ArgumentError)
       end
 
       it "set and read attrs" do
         item = MoySklad::Models::Good.find(@uuid)
 
-        item.setAttribute(META_COUNTRY, country)
-        item.setAttribute(META_LINK, link)
-        item.setAttribute(META_ARTNO, partno)
+        item.set_attribute(META_COUNTRY, country)
+        item.set_attribute(META_LINK, link)
+        item.set_attribute(META_ARTNO, partno)
 
         expect(item.save).to eq(true)
 
         item = MoySklad::Models::Good.find(@uuid)
-        expect(item.getAttribute(META_LINK[:uuid]).valueText).to eq(link)
-        expect(item.getAttribute(META_ARTNO[:uuid]).valueString).to eq(partno)
-        expect(item.getAttribute(META_COUNTRY[:uuid]).valueString).to eq(country)
+        expect(item.get_attribute(META_LINK)).to eq(link)
+        expect(item.get_attribute(META_ARTNO)).to eq(partno)
+        expect(item.get_attribute(META_COUNTRY[:uuid]).valueString).to eq(country)
       end
 
     end

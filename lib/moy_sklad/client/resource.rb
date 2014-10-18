@@ -3,7 +3,16 @@
 module ActiveResource
   class Base
 
-    def get_attribute(name, type, key)
+    # Nested object finder by type uuid + object uuid.
+    #
+    # MS data model have arrays which contains objects where each object have a special "type"
+    # uuid and object uuid. Type + Object uuids are PK for the object.
+    #
+    # @attr name [Symbol] attribute name
+    # @attr type [String] "type" uuid
+    # @attr key  [String] "object" uuid
+    #
+    def find_object(name, type, key)
       return nil if self.send(name).is_a?(MoySklad::Client::Attribute::MissingAttr)
 
       create_nested_resource(name)
