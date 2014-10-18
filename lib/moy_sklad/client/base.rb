@@ -57,7 +57,7 @@ module MoySklad::Client
       end
 
       def destroy
-        _desroy
+        _destroy
       end
     else
       def create
