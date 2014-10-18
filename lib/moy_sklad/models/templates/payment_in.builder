@@ -64,7 +64,7 @@ xml.paymentIn(readMode: readMode, changeMode: changeMode, updated: updated, upda
       xml.description_  d.description
       xml.contents_     d.contents
     }
-  end if !document.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !document.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
   xml.sum(sum: sum.sum, sumInCurrency: sum.sumInCurrency)
 

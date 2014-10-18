@@ -6,10 +6,10 @@ module Nokogiri::XML
 
     included do
       def create_element_with_attrcheck(name, *args, &block)
-        return create_element_without_attrcheck(name, nil, &block) if args[0].is_a?(::Moysklad::Client::Attribute::MissingAttr)
+        return create_element_without_attrcheck(name, nil, &block) if args[0].is_a?(::MoySklad::Client::Attribute::MissingAttr)
         return create_element_without_attrcheck(name, *args, &block) if !args[0].is_a?(Hash)
 
-        args[0].delete_if { |k, v| v.is_a?(::Moysklad::Client::Attribute::MissingAttr) }
+        args[0].delete_if { |k, v| v.is_a?(::MoySklad::Client::Attribute::MissingAttr) }
 
         create_element_without_attrcheck(name, *args, &block)
       end

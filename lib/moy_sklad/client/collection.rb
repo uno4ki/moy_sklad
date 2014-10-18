@@ -4,7 +4,7 @@ require 'active_resource'
 require 'active_support/core_ext/hash/conversions'
 require 'active_support/core_ext/hash/indifferent_access'
 
-module Moysklad::Client
+module MoySklad::Client
   class Collection < ActiveResource::Collection
 
     attr_reader :metadata

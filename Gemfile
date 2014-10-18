@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in moysklad.gemspec
+# Specify your gem's dependencies in moy_sklad.gemspec
 gemspec

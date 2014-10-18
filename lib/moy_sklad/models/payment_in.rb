@@ -1,5 +1,5 @@
-module Moysklad::Models
-  class PaymentIn < Moysklad::Client::Base
+module MoySklad::Models
+  class PaymentIn < MoySklad::Client::Base
     def initialize(*args)
       super(*args)
       create_nested_collection(:attribute)

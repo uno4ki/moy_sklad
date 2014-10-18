@@ -1,7 +1,7 @@
 # Placeholder class used by Nokogiri for create "clean" xml
 # requests.
 
-module Moysklad::Client
+module MoySklad::Client
   module Attribute
 
     class MissingAttr
@@ -19,7 +19,7 @@ module Moysklad::Client
         begin
           super
         rescue
-          Moysklad::Client::Attribute::MissingAttr.new
+          MoySklad::Client::Attribute::MissingAttr.new
         end
       else
         super
@@ -50,7 +50,7 @@ module Moysklad::Client
 
     def getArray(type)
       value = self.send(type)
-      return [] if value.nil? or value.is_a?(Moysklad::Client::Attribute::MissingAttr)
+      return [] if value.nil? or value.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
       # Convert
       self.send("#{type}=", [value]) if !value.is_a?(Array)

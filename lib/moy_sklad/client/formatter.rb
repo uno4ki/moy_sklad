@@ -4,7 +4,7 @@
 require 'active_resource'
 require 'active_support/core_ext/hash/conversions'
 
-module Moysklad::Client
+module MoySklad::Client
   class Formatter
     include ::ActiveResource::Formats::XmlFormat
 

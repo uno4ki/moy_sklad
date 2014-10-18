@@ -1,4 +1,4 @@
-module Moysklad
+module MoySklad
 
   extend self
 

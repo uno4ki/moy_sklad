@@ -1,5 +1,5 @@
-module Moysklad::Models
-  class CustomerOrder < Moysklad::Client::Base
+module MoySklad::Models
+  class CustomerOrder < MoySklad::Client::Base
 
     def initialize(*args)
       super(*args)

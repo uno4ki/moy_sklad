@@ -42,9 +42,9 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
     }
-  end if !attribute.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
 
   xml.barcode(readMode: barcode.readMode, changeMode: barcode.changeMode, barcode: barcode.barcode, barcodeType: barcode.barcodeType) {
     xml.accountUuid_  barcode.accountUuid
@@ -61,7 +61,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
         xml.uuid_         p.uuid
         xml.groupUuid_    p.groupUuid
       }
-    end if !salePrices.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+    end if !salePrices.is_a?(::MoySklad::Client::Attribute::MissingAttr)
   }
 
   pack.each do |p|
@@ -71,7 +71,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
       xml.uuid_         p.uuid
       xml.groupUuid_    p.groupUuid
     }
-  end if !pack.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+  end if !pack.is_a?(::MoySklad::Client::Attribute::MissingAttr)
 
   xml.preferences {
     preference.each do |p|
@@ -81,6 +81,6 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
         xml.uuid_         p.uuid
         xml.groupUuid_    p.groupUuid
       }
-    end if !preference.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+    end if !preference.is_a?(::MoySklad::Client::Attribute::MissingAttr)
   }
 }

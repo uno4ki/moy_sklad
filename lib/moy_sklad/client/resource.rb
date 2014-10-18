@@ -3,7 +3,7 @@ module ActiveResource
   class Base
 
     def get_attribute(name, type, key)
-      return nil if self.send(name).is_a?(Moysklad::Client::Attribute::MissingAttr)
+      return nil if self.send(name).is_a?(MoySklad::Client::Attribute::MissingAttr)
 
       create_nested_resource(name)
 

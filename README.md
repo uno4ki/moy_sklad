@@ -1,4 +1,4 @@
-# Moysklad
+# MoySklad
 
 **Auth (for rspec)**
 

@@ -38,7 +38,7 @@ xml.goodFolder(readMode: readMode, changeMode: changeMode, updated: updated, upd
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
     }
-  end if !attribute.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
 }

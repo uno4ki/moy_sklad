@@ -1,5 +1,5 @@
-module Moysklad::Models
-  class Company < Moysklad::Client::Base
+module MoySklad::Models
+  class Company < MoySklad::Client::Base
     def initialize(*args)
       super(*args)
       create_nested_resource(:contact)

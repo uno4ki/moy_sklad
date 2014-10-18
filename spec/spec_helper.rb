@@ -1,8 +1,7 @@
 require 'rspec'
-require 'ms_config.rb'
-require 'moysklad/configuration'
+require 'moy_sklad/configuration'
 
-Moysklad.config do
+MoySklad.config do
   @username = ENV["MSKL_USER"]
   @password = ENV["MSKL_PASS"]
 
@@ -10,4 +9,5 @@ Moysklad.config do
   @currency = "131bf5ff-1ee5-11e4-67ed-002590a28eca"
 end
 
-require 'moysklad'
+require 'moy_sklad'
+require 'ms_config'

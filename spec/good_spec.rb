@@ -7,19 +7,19 @@ describe 'Good' do
 
   describe :index do
     it "should return list of items" do
-      items = Moysklad::Models::Good.find(:all)
+      items = MoySklad::Models::Good.find(:all)
       expect(items.metadata[:total]).to eq(items.length)
       len = items.metadata[:total]
 
       # Newly update items, should be less then total
-      items = Moysklad::Models::Good.find(:all, params: { filter:  "updated>20141014010000"})
+      items = MoySklad::Models::Good.find(:all, params: { filter:  "updated>20141014010000"})
       expect(items.metadata[:total]).to be < len
     end
   end
 
   describe :find do
     it "should return item with uuid 05eca138-3da6-11e4-0135-002590a28eca" do
-      item = Moysklad::Models::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
+      item = MoySklad::Models::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
       expect(item.name).to eq("СТОЛИК КОКТЕЙЛЬНЫЙ ST.JAMES")
       expect(item.barcode.barcode).to eq("2000000004846")
       expect(item.uomUuid).to eq("19f1edc0-fc42-4001-94cb-c9ec9c62ec10")
@@ -28,7 +28,7 @@ describe 'Good' do
 
   describe "Simple attribute update" do
     before(:all) do
-      item = Moysklad::Models::Good.new
+      item = MoySklad::Models::Good.new
       item.name = "Simple test item for attr update test"
       item.save
       @uuid = item.uuid
@@ -36,18 +36,18 @@ describe 'Good' do
     end
 
     after(:all) do
-      Moysklad::Models::Good.find(@uuid).destroy
+      MoySklad::Models::Good.find(@uuid).destroy
     end
 
     it "and update attr" do
-      item = Moysklad::Models::Good.find(@uuid)
+      item = MoySklad::Models::Good.find(@uuid)
       expect(item.buyPrice).to eq("0.0")
       item.buyPrice = @randomPrice
       expect(item.save).to eq(true)
     end
 
     it "and read attr" do
-      item = Moysklad::Models::Good.find(@uuid)
+      item = MoySklad::Models::Good.find(@uuid)
       expect(item.buyPrice.to_f).to eq(@randomPrice)
     end
   end
@@ -55,7 +55,7 @@ describe 'Good' do
   describe "create and update" do
 
     it "should create a new Good" do
-      item = Moysklad::Models::Good.new
+      item = MoySklad::Models::Good.new
       item.name = "Just a test item, с русскими букавами in da name"
       item.description = "Отличный итем, шерстянной такой"
       expect(item.save).to eq(true)
@@ -65,13 +65,13 @@ describe 'Good' do
       uuid = item.uuid
 
       # Check item on server
-      item = Moysklad::Models::Good.find(uuid)
+      item = MoySklad::Models::Good.find(uuid)
       expect(item.uuid).to eq(uuid)
 
       # Remove item
       item.destroy
 
-      expect{Moysklad::Models::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+      expect{MoySklad::Models::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
 
     describe "should create item with salePrice and able to update only default" do
@@ -79,7 +79,7 @@ describe 'Good' do
       PRICE_CUR = "131c74fb-1ee5-11e4-a138-002590a28eca"
 
       before(:all) do
-        item = Moysklad::Models::Good.new
+        item = MoySklad::Models::Good.new
         item.name = "Test item with custom prices"
 
         item.setSalePrice(PRICE_CUR, 100)
@@ -89,16 +89,16 @@ describe 'Good' do
       end
 
       after(:all) do
-        Moysklad::Models::Good.find(@uuid).destroy
+        MoySklad::Models::Good.find(@uuid).destroy
       end
 
       it "and get price" do
-        item = Moysklad::Models::Good.find(@uuid)
+        item = MoySklad::Models::Good.find(@uuid)
         expect(item.getSalePrice(PRICE_CUR).value.to_f / 100).to eq(100)
       end
 
       it "and update CUR price (only default price can be updated)" do
-        item = Moysklad::Models::Good.find(@uuid)
+        item = MoySklad::Models::Good.find(@uuid)
 
         item.setSalePrice(PRICE_CUR, 1000)
         expect(item.save).to eq(true)
@@ -119,18 +119,18 @@ describe 'Good' do
       let(:link)    { SecureRandom.hex }
 
       before(:all) do
-        item = Moysklad::Models::Good.new
+        item = MoySklad::Models::Good.new
         item.name = "Test item with custom attributes"
         item.save
         @uuid = item.uuid
       end
 
       after(:all) do
-        Moysklad::Models::Good.find(@uuid).destroy
+        MoySklad::Models::Good.find(@uuid).destroy
       end
 
       it "should test empty attrs" do
-        item = Moysklad::Models::Good.find(@uuid)
+        item = MoySklad::Models::Good.find(@uuid)
 
         expect(item.getAttribute(META_LINK[:uuid])).to be_nil
         expect(item.getAttribute(META_ARTNO[:uuid])).to be_nil
@@ -138,7 +138,7 @@ describe 'Good' do
       end
 
       it "set and read attrs" do
-        item = Moysklad::Models::Good.find(@uuid)
+        item = MoySklad::Models::Good.find(@uuid)
 
         item.setAttribute(META_COUNTRY, country)
         item.setAttribute(META_LINK, link)
@@ -146,7 +146,7 @@ describe 'Good' do
 
         expect(item.save).to eq(true)
 
-        item = Moysklad::Models::Good.find(@uuid)
+        item = MoySklad::Models::Good.find(@uuid)
         expect(item.getAttribute(META_LINK[:uuid]).valueText).to eq(link)
         expect(item.getAttribute(META_ARTNO[:uuid]).valueString).to eq(partno)
         expect(item.getAttribute(META_COUNTRY[:uuid]).valueString).to eq(country)

@@ -1,12 +1,12 @@
 # ActiveResource base class
 # All models shoud extend this class
 
-module Moysklad::Client
+module MoySklad::Client
   class Base < ActiveResource::Base
     self.site = "https://online.moysklad.ru/exchange/rest/ms/xml"
     self.format = Formatter.new
-    self.user = Moysklad.username
-    self.password = Moysklad.password
+    self.user = MoySklad.username
+    self.password = MoySklad.password
     self.auth_type = :basic
     self.include_format_in_path = false
     self.collection_parser = Collection
@@ -57,7 +57,7 @@ module Moysklad::Client
 
     def save
       super
-      self.error.is_a?(Moysklad::Client::Attribute::MissingAttr)
+      self.error.is_a?(MoySklad::Client::Attribute::MissingAttr)
     end
 
     private

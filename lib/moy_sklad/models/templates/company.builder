@@ -41,9 +41,9 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
     }
-  end if !attribute.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
 
   requisite.each do |r|
     xml.requisite(legalTitle: r.legalTitle, legalAddress: r.legalAddress, actualAddress: r.actualAddress, inn: r.inn, kpp: r.kpp,
@@ -60,7 +60,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
         xml.deleted_      r.deleted
       }
     }
-  end if !requisite.is_a?(::Moysklad::Client::Attribute::MissingAttr)
+  end if !requisite.is_a?(::MoySklad::Client::Attribute::MissingAttr)
 
   bankAccount.each do |b|
       xml.bankAccount(readMode: b.readMode, changeMode: b.changeMode, updated: b.updatedBy, updatedBy: b.updatedBy,
@@ -72,7 +72,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
         xml.groupUuid_    b.groupUuid
         xml.deleted_      b.deleted
       }
-  end if !bankAccount.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !bankAccount.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
   xml.contact(address: contact.address, phones: contact.phones, faxes: contact.faxes, mobiles: contact.mobiles, email: contact.email)
 
@@ -88,7 +88,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.externalcode_ c.externalcode
       xml.description_  c.description
     }
-  end if !contactPerson.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !contactPerson.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
   agentNewsItem.each do |n|
     xml.agentNewsItem(readMode: n.readMode, changeMode: n.changeMode, updated: n.updated, updatedBy: n.updatedBy, moment: n.moment) {
@@ -99,12 +99,12 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.deleted_      n.deleted
       xml.text_         n.text
     }
-  end if !agentNewsItem.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !agentNewsItem.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
   xml.tags {
     tags.tag.each do |t|
       xml.tag_ t
-    end if !tags.tag.is_a?(Moysklad::Client::Attribute::MissingAttr)
+    end if !tags.tag.is_a?(MoySklad::Client::Attribute::MissingAttr)
   }
 
   sign.each do |s|
@@ -120,7 +120,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.description_  s.description
       xml.contents_     s.contents
     }
-  end if !sign.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !sign.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
   stamp.each do |s|
     xml.stamp(readMode: s.readMode, changeMode: s.changeMode, updated: s.updated, updatedBy: s.updatedBy, name: s.name,
@@ -135,5 +135,5 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.description_  s.description
       xml.contents_     s.contents
     }
-  end if !stamp.is_a?(Moysklad::Client::Attribute::MissingAttr)
+  end if !stamp.is_a?(MoySklad::Client::Attribute::MissingAttr)
 }

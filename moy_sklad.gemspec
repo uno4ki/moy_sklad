@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'moysklad/version'
+require 'moy_sklad/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "moysklad"
-  spec.version       = Moysklad::VERSION
+  spec.name          = "moy_sklad"
+  spec.version       = MoySklad::VERSION
   spec.authors       = ["uno4ki"]
   spec.email         = ["i.have@no.mail"]
   spec.description   = %q{MoySklad API}
