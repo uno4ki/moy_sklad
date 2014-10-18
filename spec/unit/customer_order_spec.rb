@@ -10,7 +10,7 @@ describe 'CustomerOrder' do
       orders = MoySklad::Models::CustomerOrder.find(:all)
       expect(orders.metadata[:total]).to eq(orders.length)
 
-      sample = 5
+      sample = 10
       sample = orders.metadata[:total] if orders.metadata[:total] < 5
 
       # Don't check ALL orders, only 5 or less
@@ -24,7 +24,7 @@ describe 'CustomerOrder' do
 
         customer = MoySklad::Models::Company.find(o.sourceAgentUuid)
         # puts "#{o.uuid} [##{o.name}] by #{customer.name}"
-        o.getArray(:customerOrderPosition).each do |p|
+        o.to_a(:customerOrderPosition).each do |p|
 
           cost += ((p.quantity.to_f * p.price.sum.to_f) / 100) ## XXX zero price found in invalid orders
 
@@ -43,7 +43,7 @@ describe 'CustomerOrder' do
       customer = MoySklad::Models::Company.find(order.sourceAgentUuid)
       expect(order.name).to eq("11295")
       expect(customer.name).to eq("Елена Лосенко")
-      expect(order.getArray(:customerOrderPosition).length).to eq(11) # 11 items in order
+      expect(order.to_a(:customerOrderPosition).length).to eq(11) # 11 items in order
     end
   end
 

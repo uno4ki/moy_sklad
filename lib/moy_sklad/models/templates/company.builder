@@ -12,7 +12,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
   xml.externalcode_ externalcode
   xml.description_  description
 
-  attribute.each do |a|
+  to_a(:attribute).each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -27,7 +27,7 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
 
-      a.file.each_value do |f|
+      a.to_a(:file).each do |f|
         xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                  created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
@@ -41,11 +41,11 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+      end
     }
-  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+  end
 
-  requisite.each do |r|
+  to_a(:requisite).each do |r|
     xml.requisite(legalTitle: r.legalTitle, legalAddress: r.legalAddress, actualAddress: r.actualAddress, inn: r.inn, kpp: r.kpp,
                   okpo: r.okpo, ogrn: r.ogrn, ogrnip: r.ogrnip, nomerSvidetelstva: r.nomerSvidetelstva,
                   dataSvidetelstva: r.dataSvidetelstva) {
@@ -60,9 +60,9 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
         xml.deleted_      r.deleted
       }
     }
-  end if !requisite.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+  end
 
-  bankAccount.each do |b|
+  to_a(:bankAccount).each do |b|
       xml.bankAccount(readMode: b.readMode, changeMode: b.changeMode, updated: b.updatedBy, updatedBy: b.updatedBy,
                       accountNumber: b.accountNumber, bankLocation: b.bankLocation, bankName: b.bankName, bic: b.bic,
                       correspondentAccount: b.correspondentAccount, isDefault: b.isDefault) {
@@ -72,11 +72,11 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
         xml.groupUuid_    b.groupUuid
         xml.deleted_      b.deleted
       }
-  end if !bankAccount.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 
   xml.contact(address: contact.address, phones: contact.phones, faxes: contact.faxes, mobiles: contact.mobiles, email: contact.email)
 
-  contactPerson.each do |c|
+  to_a(:contactPerson).each do |c|
     xml.contactPerson(readMode: c.readMode, changeMode: c.changeMode, updated: c.updated, updatedBy: c.updatedBy, name: c.name,
                       email: c.email, phone: c.phone, position: c.position) {
       xml.accountUuid_  c.accountUuid
@@ -88,9 +88,9 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.externalcode_ c.externalcode
       xml.description_  c.description
     }
-  end if !contactPerson.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 
-  agentNewsItem.each do |n|
+  to_a(:agentNewsItem).each do |n|
     xml.agentNewsItem(readMode: n.readMode, changeMode: n.changeMode, updated: n.updated, updatedBy: n.updatedBy, moment: n.moment) {
       xml.accountUuid_  n.accountUuid
       xml.accountId_    n.accountId
@@ -99,15 +99,15 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.deleted_      n.deleted
       xml.text_         n.text
     }
-  end if !agentNewsItem.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 
   xml.tags {
-    tags.tag.each do |t|
+    tags.to_a(:tag).each do |t|
       xml.tag_ t
-    end if !tags.tag.is_a?(MoySklad::Client::Attribute::MissingAttr)
+    end
   }
 
-  sign.each do |s|
+  to_a(:sign).each do |s|
     xml.sign(readMode: s.readMode, changeMode: s.changeMode, updated: s.updated, updatedBy: s.updatedBy, name: s.name,
              created: s.created, filename: s.filename, miniatureUuid: s.miniatureUuid) {
       xml.accountUuid_  s.accountUuid
@@ -120,9 +120,9 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.description_  s.description
       xml.contents_     s.contents
     }
-  end if !sign.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 
-  stamp.each do |s|
+  to_a(:stamp).each do |s|
     xml.stamp(readMode: s.readMode, changeMode: s.changeMode, updated: s.updated, updatedBy: s.updatedBy, name: s.name,
               created: s.created, filename: s.filename, miniatureUuid: s.miniatureUuid) {
       xml.accountUuid_  s.accountUuid
@@ -135,5 +135,5 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
       xml.description_  s.description
       xml.contents_     s.contents
     }
-  end if !stamp.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 }

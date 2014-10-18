@@ -26,14 +26,15 @@ module MoySklad::Client
     end
   end
 
-  module CommonAttributeAccess
+  module CustomAttrBehavior
+
     def setAttribute(info, value)
       v = get_attribute(:attribute, :metadataUuid, info[:uuid])
       if v.nil?
         data = { metadataUuid: info[:uuid] }
         data[info[:value]] = value
         a = create_and_load_resource('Attribute', data)
-        if self.getArray(:attribute).empty?
+        if self.to_a(:attribute).empty?
           self.attribute = [a]
         else
           self.attribute << a
@@ -47,7 +48,8 @@ module MoySklad::Client
       get_attribute(:attribute, :metadataUuid, uuid)
     end
 
-    def getArray(type)
+    def to_a(type)
+
       value = self.send(type)
       return [] if value.nil? || value.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
@@ -59,5 +61,5 @@ module MoySklad::Client
   end
 
   ActiveResource::Base.send(:include, MissingAttrHandler)
-  ActiveResource::Base.send(:include, CommonAttributeAccess)
+  ActiveResource::Base.send(:include, CustomAttrBehavior)
 end

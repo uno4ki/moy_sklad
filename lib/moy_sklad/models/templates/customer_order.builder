@@ -14,7 +14,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
   xml.externalcode_ externalcode
   xml.description_  description
 
-  getArray(:attribute).each do |a|
+  to_a(:attribute).each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -29,7 +29,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
 
-      a.getArray(:file).each do |f|
+      a.to_a(:file).each do |f|
         xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                  created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
@@ -47,7 +47,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
     }
   end
 
-  document.each do |d|
+  to_a(:document).each do |d|
     xml.document(readMode: d.readMode, changeMode: d.changeMode, updated: d.updated, updatedBy: d.updatedBy, name: d.name,
                  created: d.created, filename: d.filename, miniatureUuid: d.miniatureUuid, emailedDate: d.emailedDate,
                  publicId: d.publicId, operationUuid: d.operationUuid) {
@@ -61,36 +61,36 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
       xml.description_  d.description
       xml.contents_     d.contents
     }
-  end if !document.is_a?(MoySklad::Client::Attribute::MissingAttr)
+  end
 
   xml.sum(sum: sum.sum, sumInCurrency: sum.sumInCurrency)
 
   xml.demandsUuid {
-    getArray(:demandsUuid).each do |r|
+    to_a(:demandsUuid).each do |r|
       xml.demandRef_ r
     end
   }
 
   xml.invoicesOutUuid {
-    getArray(:invoicesOutUuid).each do |r|
+    to_a(:invoicesOutUuid).each do |r|
       xml.invoiceOutRef_ r
     end
   }
 
   xml.paymentsUuid {
-    getArray(:paymentsUuid).each do |r|
+    to_a(:paymentsUuid).each do |r|
       xml.financeInRef r
     end
   }
 
   xml.purchaseOrdersUuid {
-    getArray(:purchaseOrdersUuid).each do |r|
+    to_a(:purchaseOrdersUuid).each do |r|
       xml.purchaseOrderRef r
     end
   }
 
 
-  getArray(:customerOrderPosition).each do |o|
+  to_a(:customerOrderPosition).each do |o|
     xml.customerOrderPosition(readMode: o.readMode, changeMode: o.changeMode, discount: o.discount, quantity: o.quantity,
                               goodPackUuid: o.goodPackUuid, consignmentUuid: o.consignmentUuid, goodUuid: o.goodUuid,
                               slotUuid: o.slotUuid, vat: o.var) {
@@ -104,7 +104,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
       xml.price(sum: o.price.sum, sumInCurrency: o.price.sumInCurrency)
 
       xml.thins {
-        o.getArray(:thingRef).each do |t|
+        o.to_a(:thingRef).each do |t|
           xml.thingRef(readMode: t.readMode, changeMode: t.changeMode, updated: t.updated,
                        updatedBy: t.updatedBy, name: t.name, goodUuid: t.goodUuid) {
 
@@ -117,7 +117,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
             xml.externalcode_ t.externalcode
             xml.description_  t.description
 
-            t.getArray(:attribute).each do |a|
+            t.to_a(:attribute).each do |a|
               xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                             metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                             doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -132,7 +132,7 @@ xml.customerOrder(readMode: readMode, changeMode: changeMode, updated: updated, 
                 xml.groupUuid_    a.groupUuid
                 xml.deleted_      a.deleted
 
-                a.getArray(:file) do |f|
+                a.to_a(:file) do |f|
                   xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                            created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 

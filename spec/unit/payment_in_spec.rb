@@ -82,7 +82,7 @@ describe 'PaymentIn' do
 
         # check order and bounded payment
         order = MoySklad::Models::CustomerOrder.find(uuid)
-        expect(order.paymentsUuid.getArray(:financeInRef).first).to eq(payment.uuid)
+        expect(order.paymentsUuid.to_a(:financeInRef).first).to eq(payment.uuid)
 
         # Order can be destroyed only after the payment
         expect{order.destroy}.to raise_error(ActiveResource::ResourceNotFound)

@@ -10,7 +10,7 @@ xml.goodFolder(readMode: readMode, changeMode: changeMode, updated: updated, upd
   xml.externalcode_ externalcode
   xml.description_  description
 
-  attribute.each do |a|
+  to_a(:attribute).each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -24,7 +24,7 @@ xml.goodFolder(readMode: readMode, changeMode: changeMode, updated: updated, upd
       xml.uuid_         a.uuid
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
-      a.file.each_value do |f|
+      a.to_a(:file).each do |f|
         xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                  created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
@@ -38,7 +38,7 @@ xml.goodFolder(readMode: readMode, changeMode: changeMode, updated: updated, upd
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+      end
     }
-  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+  end
 }

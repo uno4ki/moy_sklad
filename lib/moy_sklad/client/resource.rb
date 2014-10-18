@@ -1,3 +1,4 @@
+# Nested resources management
 
 module ActiveResource
   class Base

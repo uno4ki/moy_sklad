@@ -10,7 +10,7 @@ xml.customEntity(readMode: readMode, changeMode: changeMode, updated: updated, u
   xml.externalcode_ externalcode
   xml.description_  description
 
-  getArray(:attribute).each do |a|
+  to_a(:attribute).each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -25,7 +25,7 @@ xml.customEntity(readMode: readMode, changeMode: changeMode, updated: updated, u
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
 
-      a.getArray(:file).each do |f|
+      a.to_a(:file).each do |f|
         xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                  created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 

@@ -14,7 +14,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
   xml.externalcode_ externalcode
   xml.description_  description
 
-  attribute.each do |a|
+  to_a(:attribute).each do |a|
     xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
                   metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
@@ -28,7 +28,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
       xml.uuid_         a.uuid
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
-      a.file.each_value do |f|
+      a.to_a(:file).each do |f|
         xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
                  created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
@@ -42,9 +42,9 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
           xml.description_  f.description
           xml.contents_     f.contents
         }
-      end if !a.file.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+      end
     }
-  end if !attribute.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+  end
 
   xml.barcode(readMode: barcode.readMode, changeMode: barcode.changeMode, barcode: barcode.barcode, barcodeType: barcode.barcodeType) {
     xml.accountUuid_  barcode.accountUuid
@@ -54,33 +54,33 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
   }
 
   xml.salePrices {
-    salePrices.price.each do |p|
+    salePrices.to_a(:price).each do |p|
       xml.price(readMode: p.readMode, changeMode: p.changeMode, currencyUuid: p.currencyUuid, priceTypeUuid: p.priceTypeUuid, value: p.value) {
         xml.accountUuid_  p.accountUuid
         xml.accountId_    p.accountId
         xml.uuid_         p.uuid
         xml.groupUuid_    p.groupUuid
       }
-    end if !salePrices.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+    end
   }
 
-  pack.each do |p|
+  to_a(:pack).each do |p|
     xml.pack(readMode: p.readMode, changeMode: p.changeMode, quantity: p.quantity, uomUuid: p.uomUuid) {
       xml.accountUuid_  p.accountUuid
       xml.accountId_    p.accountId
       xml.uuid_         p.uuid
       xml.groupUuid_    p.groupUuid
     }
-  end if !pack.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+  end
 
   xml.preferences {
-    preference.each do |p|
+    to_a(:preference).each do |p|
       xml.preference(readMode: p.readMode, changeMode: p.changeMode, slotUuid: p.slotUuid) {
         xml.accountUuid_  p.accountUuid
         xml.accountId_    p.accountId
         xml.uuid_         p.uuid
         xml.groupUuid_    p.groupUuid
       }
-    end if !preference.is_a?(::MoySklad::Client::Attribute::MissingAttr)
+    end
   }
 }
