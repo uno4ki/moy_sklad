@@ -3,10 +3,10 @@
 
 module MoySklad::Client
   class Base < ActiveResource::Base
-    self.site = "https://online.moysklad.ru/exchange/rest/ms/xml"
+    self.site = MoySklad.configuration.base_url
     self.format = Formatter.new
-    self.user = MoySklad.username
-    self.password = MoySklad.password
+    self.user = MoySklad.configuration.user_name
+    self.password = MoySklad.configuration.password
     self.auth_type = :basic
     self.include_format_in_path = false
     self.collection_parser = Collection
@@ -26,7 +26,8 @@ module MoySklad::Client
         check_prefix_options(prefix_options)
 
         prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-        "#{prefix(prefix_options)}#{element_name.classify}/#{URI.parser.escape id.to_s}#{query_string(query_options)}"
+        "#{prefix(prefix_options)}#{element_name.classify}/" \
+        "#{URI.parser.escape id.to_s}#{query_string(query_options)}"
       end
 
       def new_element_path(prefix_options = {})
@@ -65,23 +66,23 @@ module MoySklad::Client
     # Custom data encoder
     # Template compiled only ONCE !!!
     def encode
-      if !respond_to?(:create_xml)
-        File.open(File.join("#{@@template_path}", "#{self.class.element_name}.builder")) do |f|
-          template = f.read
-
-          code = <<-END_CODE
-            def create_xml
-              builder = ::Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
-                #{template}
-              end.to_xml()
-            end
-          END_CODE
-
-          self.class.module_eval(code)
-        end
-      end
+      compile_template unless respond_to?(:create_xml)
       create_xml
     end
 
+    def compile_template
+      file_path = File.join("#{@@template_path}", "#{self.class.element_name}.builder")
+      File.open(file_path) do |f|
+        template = f.read
+
+        self.class.module_eval(<<-CODE)
+          def create_xml
+            builder = ::Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
+              #{template}
+            end.to_xml()
+          end
+        CODE
+      end
+    end
   end
 end

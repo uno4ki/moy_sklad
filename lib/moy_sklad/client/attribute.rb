@@ -3,7 +3,6 @@
 
 module MoySklad::Client
   module Attribute
-
     class MissingAttr
       def method_missing(meth, *args)
         MissingAttr.new
@@ -31,9 +30,9 @@ module MoySklad::Client
     def setAttribute(info, value)
       v = get_attribute(:attribute, :metadataUuid, info[:uuid])
       if v.nil?
-        data = {metadataUuid: info[:uuid]}
+        data = { metadataUuid: info[:uuid] }
         data[info[:value]] = value
-        a = create_and_load_resource("Attribute", data)
+        a = create_and_load_resource('Attribute', data)
         if self.getArray(:attribute).empty?
           self.attribute = [a]
         else
@@ -50,10 +49,10 @@ module MoySklad::Client
 
     def getArray(type)
       value = self.send(type)
-      return [] if value.nil? or value.is_a?(MoySklad::Client::Attribute::MissingAttr)
+      return [] if value.nil? || value.is_a?(MoySklad::Client::Attribute::MissingAttr)
 
       # Convert
-      self.send("#{type}=", [value]) if !value.is_a?(Array)
+      self.send("#{type}=", [value]) unless value.is_a?(Array)
       self.send(type)
     end
 

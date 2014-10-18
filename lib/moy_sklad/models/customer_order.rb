@@ -9,7 +9,8 @@ module MoySklad::Models
     end
 
     def addItem(id, options = {})
-      item = create_and_load_resource("CustomerOrderPosition", { goodUuid: id }.merge!(options))
+      item = create_and_load_resource("CustomerOrderPosition",
+                                      { goodUuid: id }.merge!(options))
       if getArray(:customerOrderPosition).empty?
         self.customerOrderPosition = [item]
       else

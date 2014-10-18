@@ -1,5 +1,5 @@
-require "moy_sklad/client/formatter.rb"
-require "moy_sklad/client/collection.rb"
-require "moy_sklad/client/attribute.rb"
-require "moy_sklad/client/resource.rb"
-require "moy_sklad/client/base.rb"
+require 'moy_sklad/client/formatter'
+require 'moy_sklad/client/collection'
+require 'moy_sklad/client/attribute'
+require 'moy_sklad/client/resource'
+require 'moy_sklad/client/base'
