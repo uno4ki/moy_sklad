@@ -45,22 +45,22 @@ xml.company(readMode: readMode, changeMode: changeMode, updated: updated, update
     }
   end
 
-  to_a(:requisite).each do |r|
-    xml.requisite(legalTitle: r.legalTitle, legalAddress: r.legalAddress, actualAddress: r.actualAddress, inn: r.inn, kpp: r.kpp,
-                  okpo: r.okpo, ogrn: r.ogrn, ogrnip: r.ogrnip, nomerSvidetelstva: r.nomerSvidetelstva,
-                  dataSvidetelstva: r.dataSvidetelstva) {
+  xml.requisite(legalTitle: requisite.legalTitle, legalAddress: requisite.legalAddress, actualAddress: requisite.actualAddress,
+                inn: requisite.inn, kpp: requisite.kpp, okpo: requisite.okpo, ogrn: requisite.ogrn, ogrnip: requisite.ogrnip,
+                nomerSvidetelstva: requisite.nomerSvidetelstva, dataSvidetelstva: requisite.dataSvidetelstva) {
 
-      xml.bankAccount(readMode: r.readMode, changeMode: r.changeMode, updated: r.updatedBy, updatedBy: r.updatedBy,
-                      accountNumber: r.accountNumber, bankLocation: r.bankLocation, bankName: r.bankName, bic: r.bic,
-                      correspondentAccount: r.correspondentAccount, isDefault: r.isDefault) {
-        xml.accountUuid_  r.accountUuid
-        xml.accountId_    r.accountId
-        xml.uuid_         r.uuid
-        xml.groupUuid_    r.groupUuid
-        xml.deleted_      r.deleted
-      }
-    }
-  end
+    xml.bankAccount(readMode: requisite.bankAccont.readMode, changeMode: requisite.bankAccont.changeMode,
+                    updated: requisite.bankAccont.updatedBy, updatedBy: requisite.bankAccont.updatedBy,
+                    accountNumber: requisite.bankAccont.accountNumber, bankLocation: requisite.bankAccont.bankLocation,
+                    bankName: requisite.bankAccont.bankName, bic: requisite.bankAccont.bic,
+                    correspondentAccount: requisite.correspondentAccount, isDefault: requisite.bankAccont.isDefault) {
+      xml.accountUuid_  requisite.bankAccount.accountUuid
+      xml.accountId_    requisite.bankAccount.accountId
+      xml.uuid_         requisite.bankAccount.uuid
+      xml.groupUuid_    requisite.bankAccount.groupUuid
+      xml.deleted_      requisite.bankAccount.deleted
+    } unless requisite.bankAccount.empty?
+  } unless requisite.empty?
 
   to_a(:bankAccount).each do |b|
       xml.bankAccount(readMode: b.readMode, changeMode: b.changeMode, updated: b.updatedBy, updatedBy: b.updatedBy,

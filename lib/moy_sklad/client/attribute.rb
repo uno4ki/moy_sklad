@@ -90,6 +90,10 @@ module MoySklad::Client
       self.send(type)
     end
 
+    # Check is nested resource empty or not
+    def empty?
+      attributes.empty?
+    end
   end
 
   ActiveResource::Base.send(:include, MissingAttrHandler)
