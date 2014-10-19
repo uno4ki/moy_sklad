@@ -22,6 +22,9 @@ module MoySklad
   # @see Configuration
   def self.configure
     yield configuration if block_given?
+    MoySklad::Client::Base.user = @configuration.user_name
+    MoySklad::Client::Base.password = @configuration.password
+    MoySklad::Client::Base.site = @configuration.base_url
   end
 
   # Stores runtime configuration information.
@@ -51,7 +54,7 @@ module MoySklad
     # @attr value [String] defaults to
     # `'131bf5ff-1ee5-11e4-67ed-002590a28eca'`
     attr_accessor :currency
-  
+
     def initialize
       @user_name = ''
       @password = ''
