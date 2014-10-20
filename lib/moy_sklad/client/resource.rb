@@ -47,9 +47,9 @@ module ActiveResource
 
     def create_nested_collection_or_resource(name, collection = true)
       name = name.to_s
-      if !known_attributes.include?(name)
-        self.known_attributes << name
-        self.attributes[name] = collection ? [] : create_and_load_resource(name)
+      if !known_attributes.include?(name) || attributes[name].nil?
+        known_attributes << name
+        attributes[name] = collection ? [] : create_and_load_resource(name)
       end
     end
   end

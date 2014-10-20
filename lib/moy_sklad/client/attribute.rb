@@ -38,8 +38,8 @@ module MoySklad::Client
     #
     def set_attribute(info, value)
 
-      raise ArgumentError, "Argument should be hash with at least [:uuid, :value] keys" unless info.is_a?(Hash)
-      raise ArgumentError, "You must provide keys: [:uuid, :value]" unless info.has_key?(:uuid) || info.has_key?(:value)
+      fail ArgumentError, "Argument should be hash with at least [:uuid, :value] keys" unless info.is_a?(Hash)
+      fail ArgumentError, "You must provide keys: [:uuid, :value]" unless info.has_key?(:uuid) || info.has_key?(:value)
 
       v = find_object(:attribute, :metadataUuid, info[:uuid])
       if v.nil?
@@ -66,7 +66,7 @@ module MoySklad::Client
 
       uuid = info if info.is_a?(String) && (info.length == 36)
       uuid = info[:uuid] if info.is_a?(Hash) && (!info[:uuid].nil? && info[:uuid].length == 36)
-      raise ArgumentError, "Argument should be uuid string or hash with [:uuid] key" if uuid.nil?
+      fail ArgumentError, "Argument should be uuid string or hash with [:uuid] key" if uuid.nil?
 
       a = find_object(:attribute, :metadataUuid, uuid)
 

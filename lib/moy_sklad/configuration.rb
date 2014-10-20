@@ -22,9 +22,6 @@ module MoySklad
   # @see Configuration
   def self.configure
     yield configuration if block_given?
-    MoySklad::Client::Base.user = @configuration.user_name
-    MoySklad::Client::Base.password = @configuration.password
-    MoySklad::Client::Base.site = @configuration.base_url
   end
 
   # Stores runtime configuration information.
@@ -39,16 +36,28 @@ module MoySklad
   class Configuration
     # User name for authentication.
     # @attr value [String] defaults to `''`
-    attr_accessor :user_name
+    attr_reader :user_name
+
+    def user_name=(v)
+      MoySklad::Client::Base.user = @user_name = v
+    end
 
     # Password for authentication.
     # @attr value [String] defaults to `''`
-    attr_accessor :password
+    attr_reader :password
+
+    def password=(v)
+      MoySklad::Client::Base.password = @password = v
+    end
 
     # Base url.
     # @attr value [String] defaults to
     # `'https://online.moysklad.ru/exchange/rest/ms/xml'`
-    attr_accessor :base_url
+    attr_reader :base_url
+
+    def base_url=(v)
+      MoySklad::Client::Base.site = @base_url = v
+    end
 
     # Currency UUID.
     # @attr value [String] defaults to
