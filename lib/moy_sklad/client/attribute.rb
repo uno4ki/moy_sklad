@@ -1,5 +1,6 @@
 # Placeholder class used by Nokogiri for create "clean" xml
 # requests.
+require 'active_support/core_ext/hash/indifferent_access'
 
 module MoySklad::Client
   module Attribute
@@ -39,6 +40,8 @@ module MoySklad::Client
     def set_attribute(info, value)
 
       fail ArgumentError, "Argument should be hash with at least [:uuid, :value] keys" unless info.is_a?(Hash)
+
+      info = HashWithIndifferentAccess.new(info)
       fail ArgumentError, "You must provide keys: [:uuid, :value]" unless info.has_key?(:uuid) || info.has_key?(:value)
 
       v = find_object(:attribute, :metadataUuid, info[:uuid])
@@ -65,7 +68,12 @@ module MoySklad::Client
     def get_attribute(info)
 
       uuid = info if info.is_a?(String) && (info.length == 36)
-      uuid = info[:uuid] if info.is_a?(Hash) && (!info[:uuid].nil? && info[:uuid].length == 36)
+
+      if info.is_a?(Hash)
+        info = HashWithIndifferentAccess.new(info)
+        uuid = info[:uuid] if info.is_a?(Hash) && (!info[:uuid].nil? && info[:uuid].length == 36)
+      end
+
       fail ArgumentError, "Argument should be uuid string or hash with [:uuid] key" if uuid.nil?
 
       a = find_object(:attribute, :metadataUuid, uuid)
