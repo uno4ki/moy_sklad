@@ -1,4 +1,4 @@
-module MoySklad::Models
+module MoySklad::Model
   class CustomerOrder < MoySklad::Client::Base
 
     def initialize(*args)

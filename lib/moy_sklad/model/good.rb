@@ -1,4 +1,4 @@
-module MoySklad::Models
+module MoySklad::Model
   class Good < MoySklad::Client::Base
     def set_sale_price(type, value)
       create_nested_resource(:salePrices)

@@ -4,14 +4,14 @@ describe 'PaymentIn' do
 
   describe :index do
     it "should return list of payments" do
-      payments = MoySklad::Models::PaymentIn.find(:all)
+      payments = MoySklad::Model::PaymentIn.find(:all)
       expect(payments.metadata[:total]).to eq(payments.length)
     end
   end
 
   describe :find do
     it "should return payment with uuid 26da6116-5451-11e4-90a2-8ecb001445e2" do
-      payment = MoySklad::Models::PaymentIn.find("26da6116-5451-11e4-90a2-8ecb001445e2")
+      payment = MoySklad::Model::PaymentIn.find("26da6116-5451-11e4-90a2-8ecb001445e2")
       expect(payment.name).to eq("00003")
       expect(payment.sum.sum).to eq("1540080.0")
     end
@@ -20,31 +20,31 @@ describe 'PaymentIn' do
   describe :create do
 
     it "should create new empty PaymentIn" do
-      payment = MoySklad::Models::PaymentIn.new
+      payment = MoySklad::Model::PaymentIn.new
       expect(payment.save).to eq(true)
       expect(payment.uuid.length).to eq(36)
       payment.destroy
     end
 
     it "should create new non-empty PaymentIn" do
-      payment = MoySklad::Models::PaymentIn.new
+      payment = MoySklad::Model::PaymentIn.new
       payment.name = "test - payment"
       payment.sum.sum = 1000 * 100
       expect(payment.save).to eq(true)
       expect(payment.uuid.length).to eq(36)
 
       uuid = payment.uuid
-      payment = MoySklad::Models::PaymentIn.find(uuid)
+      payment = MoySklad::Model::PaymentIn.find(uuid)
       expect(payment.name).to eq("test - payment")
       expect(payment.sum.sum).to eq("100000.0")
       expect(payment.sum.sumInCurrency).to eq("100000.0")
       payment.destroy
 
-      expect{MoySklad::Models::PaymentIn.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+      expect{MoySklad::Model::PaymentIn.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
 
     it "should create new order + payment" do
-        order = MoySklad::Models::CustomerOrder.new
+        order = MoySklad::Model::CustomerOrder.new
         order.name = "Test with payment - API"
         order.applicable = true
         order.targetAgentUuid = TGT_AGENT
@@ -68,7 +68,7 @@ describe 'PaymentIn' do
         expect(order.uuid.length).to eq(36)
         uuid = order.uuid
 
-        payment = MoySklad::Models::PaymentIn.new
+        payment = MoySklad::Model::PaymentIn.new
         payment.sum.sum = order.sum.sum
         payment.targetAgentUuid = TGT_AGENT
         payment.sourceAgentUuid = SRC_AGENT
@@ -79,7 +79,7 @@ describe 'PaymentIn' do
         expect(payment.uuid.length).to eq(36)
 
         # check order and bounded payment
-        order = MoySklad::Models::CustomerOrder.find(uuid)
+        order = MoySklad::Model::CustomerOrder.find(uuid)
         expect(order.paymentsUuid.to_a(:financeInRef).first).to eq(payment.uuid)
 
         # Order can be destroyed only after the payment
@@ -90,24 +90,24 @@ describe 'PaymentIn' do
 
     it "create payment and update applicable status" do
 
-      payment = MoySklad::Models::PaymentIn.new
+      payment = MoySklad::Model::PaymentIn.new
       payment.targetAgentUuid = TGT_AGENT
       payment.sourceAgentUuid = SRC_AGENT
       payment.sum.sum = 1000 * 100
       expect(payment.save).to eq(true)
       uuid = payment.uuid
 
-      payment = MoySklad::Models::PaymentIn.find(uuid)
+      payment = MoySklad::Model::PaymentIn.find(uuid)
       expect(payment.applicable).to eq("false")
       payment.applicable = "true"
       expect(payment.save).to eq(true)
 
-      payment = MoySklad::Models::PaymentIn.find(uuid)
+      payment = MoySklad::Model::PaymentIn.find(uuid)
       expect(payment.applicable).to eq("true")
 
       payment.destroy
 
-      expect{MoySklad::Models::PaymentIn.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+      expect{MoySklad::Model::PaymentIn.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
   end
 end

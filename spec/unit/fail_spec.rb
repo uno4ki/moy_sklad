@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Some fail tests" do
 
   it "should return error on save (invalid uuid)" do
-    p = MoySklad::Models::PaymentIn.new
+    p = MoySklad::Model::PaymentIn.new
     p.demandsUuid = [nil]
 
     expect(p.save).to eq(false)

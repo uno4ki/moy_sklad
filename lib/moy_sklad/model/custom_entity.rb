@@ -1,4 +1,4 @@
-module MoySklad::Models
+module MoySklad::Model
   class CustomEntity < MoySklad::Client::Base
   end
 end

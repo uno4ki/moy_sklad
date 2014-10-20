@@ -14,7 +14,7 @@ module MoySklad::Client
       self.collection_parser = Collection
     end
 
-    @@template_path = File.join(File.dirname(__FILE__), '..', 'models', 'templates')
+    @@template_path = File.join(File.dirname(__FILE__), '..', 'model', 'templates')
 
     class << self
 

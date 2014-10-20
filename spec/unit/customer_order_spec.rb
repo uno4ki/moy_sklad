@@ -5,7 +5,7 @@ describe 'CustomerOrder' do
   describe :index do
 
     it "should enumerate orders, customers and goods (consistency test)" do
-      orders = MoySklad::Models::CustomerOrder.find(:all)
+      orders = MoySklad::Model::CustomerOrder.find(:all)
       expect(orders.metadata[:total]).to eq(orders.length)
 
       sample = 10
@@ -20,14 +20,14 @@ describe 'CustomerOrder' do
 
         expect(o.sourceAgentUuid.length).to eq(36) # uuid
 
-        customer = MoySklad::Models::Company.find(o.sourceAgentUuid)
+        customer = MoySklad::Model::Company.find(o.sourceAgentUuid)
         # puts "#{o.uuid} [##{o.name}] by #{customer.name}"
         o.to_a(:customerOrderPosition).each do |p|
 
           cost += ((p.quantity.to_f * p.price.sum.to_f) / 100) ## XXX zero price found in invalid orders
 
           expect(p.goodUuid.length).to eq(36) # uuid
-          good = MoySklad::Models::Good.find(p.goodUuid)
+          good = MoySklad::Model::Good.find(p.goodUuid)
           # puts " - #{good.uuid} [#{good.name}], #{p.quantity}"
         end
         # puts " total cost: #{cost}"
@@ -37,8 +37,8 @@ describe 'CustomerOrder' do
 
   describe :find do
     it "should return order with uuid eef4b3d4-1eea-11e4-8874-002590a28eca" do
-      order = MoySklad::Models::CustomerOrder.find("eef4b3d4-1eea-11e4-8874-002590a28eca")
-      customer = MoySklad::Models::Company.find(order.sourceAgentUuid)
+      order = MoySklad::Model::CustomerOrder.find("eef4b3d4-1eea-11e4-8874-002590a28eca")
+      customer = MoySklad::Model::Company.find(order.sourceAgentUuid)
       expect(order.name).to eq("11295")
       expect(customer.name).to eq("Елена Лосенко")
       expect(order.to_a(:customerOrderPosition).length).to eq(11) # 11 items in order
@@ -47,16 +47,16 @@ describe 'CustomerOrder' do
 
   describe :create do
       it "should create new empty Order" do
-        order = MoySklad::Models::CustomerOrder.new
+        order = MoySklad::Model::CustomerOrder.new
         expect(order.save).to eq(true)
         expect(order.uuid.length).to eq(36)
         uuid = order.uuid
         order.destroy
-        expect{MoySklad::Models::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+        expect{MoySklad::Model::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
       end
 
       it "should create new Order with values" do
-        order = MoySklad::Models::CustomerOrder.new
+        order = MoySklad::Model::CustomerOrder.new
         order.name = "12345 - api test"
         order.targetAgentUuid = TGT_AGENT
         order.sourceStoreUuid = SRC_STORE
@@ -65,20 +65,20 @@ describe 'CustomerOrder' do
         expect(order.uuid.length).to eq(36)
         uuid = order.uuid
 
-        order = MoySklad::Models::CustomerOrder.find(uuid)
+        order = MoySklad::Model::CustomerOrder.find(uuid)
         expect(order.name).to eq("12345 - api test")
         expect(order.targetAgentUuid).to eq(TGT_AGENT)
         expect(order.sourceStoreUuid).to eq(SRC_STORE)
         expect(order.sourceAgentUuid).to eq(SRC_AGENT)
 
-        customer = MoySklad::Models::Company.find(order.sourceAgentUuid)
+        customer = MoySklad::Model::Company.find(order.sourceAgentUuid)
         expect(customer.name).to eq("Елена Лосенко")
         order.destroy
-        expect{MoySklad::Models::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+        expect{MoySklad::Model::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
       end
 
       it "should create order with items and check cost" do
-        order = MoySklad::Models::CustomerOrder.new
+        order = MoySklad::Model::CustomerOrder.new
         order.name = "12345 - api test [items]"
         order.applicable = true
         order.targetAgentUuid = TGT_AGENT
@@ -102,7 +102,7 @@ describe 'CustomerOrder' do
         expect(order.uuid.length).to eq(36)
         uuid = order.uuid
 
-        order = MoySklad::Models::CustomerOrder.find(uuid)
+        order = MoySklad::Model::CustomerOrder.find(uuid)
         expect(order.name).to eq("12345 - api test [items]")
         expect(order.targetAgentUuid).to eq(TGT_AGENT)
         expect(order.sourceStoreUuid).to eq(SRC_STORE)
@@ -118,11 +118,11 @@ describe 'CustomerOrder' do
         expect(order.sum.sumInCurrency).to eq("4.744008E7")
 
         expect(order.customerOrderPosition.length).to eq(KNOWN_ITEMS.keys.length)
-        customer = MoySklad::Models::Company.find(order.sourceAgentUuid)
+        customer = MoySklad::Model::Company.find(order.sourceAgentUuid)
         expect(customer.name).to eq("Елена Лосенко")
 
         order.destroy
-        expect{MoySklad::Models::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
+        expect{MoySklad::Model::CustomerOrder.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
 
       end
    end

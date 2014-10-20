@@ -1,4 +1,4 @@
-module MoySklad::Models
+module MoySklad::Model
   class PaymentIn < MoySklad::Client::Base
     def initialize(*args)
       super(*args)
