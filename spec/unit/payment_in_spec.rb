@@ -10,10 +10,17 @@ describe 'PaymentIn' do
   end
 
   describe :find do
-    it "should return payment with uuid 26da6116-5451-11e4-90a2-8ecb001445e2" do
-      payment = MoySklad::Model::PaymentIn.find("26da6116-5451-11e4-90a2-8ecb001445e2")
-      expect(payment.name).to eq("00003")
-      expect(payment.sum.sum).to eq("1540080.0")
+    it "should return payment" do
+      payment = MoySklad::Model::PaymentIn.new
+      payment.name = "test - payment"
+      payment.sum.sum = 1000 * 100
+      expect(payment.save).to eq(true)
+      expect(payment.uuid.length).to eq(36)
+
+      uuid = payment.uuid
+      payment = MoySklad::Model::PaymentIn.find(uuid)
+      expect(payment.name).to eq("test - payment")
+      expect(payment.sum.sum).to eq("100000.0")
     end
   end
 
@@ -43,7 +50,7 @@ describe 'PaymentIn' do
       expect{MoySklad::Model::PaymentIn.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
 
-    it "should create new order + payment" do
+    it "should create new order + payment", pending: 'need real data in config' do
         order = MoySklad::Model::CustomerOrder.new
         order.name = "Test with payment - API"
         order.applicable = true
@@ -88,7 +95,7 @@ describe 'PaymentIn' do
         order.destroy
     end
 
-    it "create payment and update applicable status" do
+    it "create payment and update applicable status", pending: 'need real data in config' do
 
       payment = MoySklad::Model::PaymentIn.new
       payment.targetAgentUuid = TGT_AGENT

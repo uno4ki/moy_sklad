@@ -10,16 +10,15 @@ describe 'Company' do
   end
 
   describe :find do
-    it "should return item with uuid 1f91e2b7-1ee7-11e4-b82f-002590a28eca" do
-      company = MoySklad::Model::Company.find("1f91e2b7-1ee7-11e4-b82f-002590a28eca")
-      expect(company.name).to eq("Светлана")
-      expect(company.tags.tag).to eq("клиент")
-    end
+    it "should find company" do
+      company = MoySklad::Model::Company.new
+      company.name = "Test company"
+      expect(company.save).to eq(true)
 
-    it "should return item with uuid 1460b0a4-22d9-11e4-0aad-002590a28eca" do
-      company = MoySklad::Model::Company.find("1460b0a4-22d9-11e4-0aad-002590a28eca")
-      expect(company.name).to eq("Анастасия")
-      expect(company.tags.tag).to match_array(["клиент", "дизайнер"])
+      uuid = company.uuid
+
+      company = MoySklad::Model::Company.find(uuid)
+      expect(company.name).to eq("Test company")
     end
   end
 

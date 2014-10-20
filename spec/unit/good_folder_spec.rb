@@ -10,9 +10,12 @@ describe 'GoodFolder' do
   end
 
   describe :find do
-    it "should return item with uuid a3e322e1-1ef1-11e4-9fd4-002590a28eca" do
-      folder = MoySklad::Model::GoodFolder.find("a3e322e1-1ef1-11e4-9fd4-002590a28eca")
-      expect(folder.name).to eq("Винные, коктейльные, барные столики")
+    it "should return item" do
+      folder = MoySklad::Model::GoodFolder.new
+      folder.name = "Test::top level"
+      expect(folder.save).to eq(true)
+      folder = MoySklad::Model::GoodFolder.find(folder.uuid)
+      expect(folder.name).to eq("Test::top level")
     end
   end
 

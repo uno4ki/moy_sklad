@@ -16,11 +16,12 @@ describe 'Good' do
   end
 
   describe :find do
-    it "should return item with uuid 05eca138-3da6-11e4-0135-002590a28eca" do
-      item = MoySklad::Model::Good.find("05eca138-3da6-11e4-0135-002590a28eca")
-      expect(item.name).to eq("СТОЛИК КОКТЕЙЛЬНЫЙ ST.JAMES")
-      expect(item.barcode.barcode).to eq("2000000004846")
-      expect(item.uomUuid).to eq("19f1edc0-fc42-4001-94cb-c9ec9c62ec10")
+    it "should return good" do
+      item = MoySklad::Model::Good.new
+      item.name = "Sample good"
+      item.save
+      item = MoySklad::Model::Good.find(item.uuid)
+      expect(item.name).to eq("Sample good")
     end
   end
 
@@ -51,7 +52,6 @@ describe 'Good' do
   end
 
   describe "create and update" do
-
     it "should create a new Good" do
       item = MoySklad::Model::Good.new
       item.name = "Just a test item, с русскими букавами in da name"
@@ -72,10 +72,8 @@ describe 'Good' do
       expect{MoySklad::Model::Good.find(uuid)}.to raise_error(ActiveResource::ResourceNotFound)
     end
 
-    describe "should create item with salePrice and able to update only default" do
-
-      PRICE_CUR = "131c74fb-1ee5-11e4-a138-002590a28eca"
-
+    describe "should create item with salePrice and able to update only default",
+             pending: 'need real data in config' do
       before(:all) do
         item = MoySklad::Model::Good.new
         item.name = "Test item with custom prices"
@@ -105,13 +103,7 @@ describe 'Good' do
       end
     end
 
-
     describe "item with custom attributes" do
-
-      META_COUNTRY  = {uuid: "9bdf2792-2c52-11e4-ea35-002590a28eca", value: :valueString}
-      META_ARTNO    = {uuid: "eb396242-1efe-11e4-d971-002590a28eca", value: :valueString}
-      META_LINK     = {uuid: "51e20842-22eb-11e4-a5c3-002590a28eca", value: :valueText}
-
       let(:partno)  { SecureRandom.hex }
       let(:country) { SecureRandom.hex }
       let(:link)    { SecureRandom.hex }
@@ -127,7 +119,7 @@ describe 'Good' do
         MoySklad::Model::Good.find(@uuid).destroy
       end
 
-      it "should test empty attrs" do
+      it "should test empty attrs", pending: 'need real data in config' do
         item = MoySklad::Model::Good.find(@uuid)
 
         expect(item.get_attribute(META_LINK[:uuid])).to be_nil
@@ -136,7 +128,7 @@ describe 'Good' do
         expect{item.get_attribute("foo")}.to raise_error(ArgumentError)
       end
 
-      it "set and read attrs" do
+      it "set and read attrs", pending: 'need real data in config' do
         item = MoySklad::Model::Good.find(@uuid)
 
         item.set_attribute(META_COUNTRY, country)
