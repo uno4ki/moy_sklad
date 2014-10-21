@@ -51,7 +51,7 @@ xml.good(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy
     xml.accountId_    barcode.accountId
     xml.uuid_         barcode.uuid
     xml.groupUuid_    barcode.groupUuid
-  }
+  } unless xml.barcode.empty?
 
   xml.salePrices {
     salePrices.to_a(:price).each do |p|
