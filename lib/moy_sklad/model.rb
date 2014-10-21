@@ -7,4 +7,5 @@ require 'moy_sklad/model/company'
 require 'moy_sklad/model/customer_order'
 require 'moy_sklad/model/payment_in'
 require 'moy_sklad/model/custom_entity'
+require 'moy_sklad/model/country'
 

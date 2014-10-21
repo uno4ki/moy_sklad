@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'moy_sklad'
+
+fail "Please provide filename" unless ARGF.argv.length == 1
+
+MoySklad.configure do |c|
+  c.user_name = ENV['MSKL_USER']
+  c.password = ENV['MSKL_PASS']
+end
+
+File.open(ARGF.argv[0], "w+") do |f|
+  f.write("---\n")
+  MoySklad::Model::Country.find(:all).each do |c|
+    f.write("\"#{c.code}\": #{c.uuid}\n")
+  end
+end
