@@ -102,6 +102,12 @@ module MoySklad::Client
     def empty?
       attributes.empty?
     end
+
+    # Remove attribute from object
+    def remove_attr(attribute)
+      attributes.delete(attribute)
+      known_attributes.delete(attribute)
+    end
   end
 
   ActiveResource::Base.send(:include, MissingAttrHandler)
