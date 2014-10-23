@@ -91,7 +91,7 @@ describe 'CustomerOrder' do
       order.sum.sumInCurrency = "100"
 
       KNOWN_ITEMS.each do |id, info|
-        order.addItem(id, {quantity: info[:quantity],
+        order.add_item(id, {quantity: info[:quantity],
             basePrice: { sum: info[:price] * 100, sumInCurrency: info[:price] * 100},
             price: { sum: info[:price] * 100, sumInCurrency: info[:price] * 100}})
       end

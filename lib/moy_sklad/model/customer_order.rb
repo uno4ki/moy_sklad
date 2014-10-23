@@ -8,7 +8,7 @@ module MoySklad::Model
       create_nested_resource(:sum)
     end
 
-    def addItem(id, options = {})
+    def add_item(id, options = {})
       item = create_and_load_resource("CustomerOrderPosition",
                                       { goodUuid: id }.merge!(options))
       if to_a(:customerOrderPosition).empty?
