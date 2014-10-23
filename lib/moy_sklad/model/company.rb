@@ -11,7 +11,13 @@ module MoySklad::Model
     end
 
     def add_contact(options)
-      self.contactPerson << create_and_load_resource('contactPerson', options)
+
+      # We're always have one person
+      if to_a(:contactPerson).empty?
+        contactPerson << create_and_load_resource('contactPerson', options)
+      else
+        to_a(:contactPerson)[0].load(options)
+      end
     end
   end
 end

@@ -1,8 +1,7 @@
-xml.paymentIn(readMode: readMode, changeMode: changeMode, updated: updated, updatedBy: updatedBy, name: name, stateUuid: stateUuid,
-              targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid, targetStoreUuid: targetStoreUuid,
-              sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid, contractUuid: contractUuid,
-              moment: moment, targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid, payerVat: payerVat,
-              retailStoreUuid: retailStoreUuid, currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded,
+xml.paymentIn(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid,
+              targetStoreUuid: targetStoreUuid, sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid,
+              contractUuid: contractUuid, moment: moment, targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid,
+              payerVat: payerVat, retailStoreUuid: retailStoreUuid, currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded,
               created: created, createdBy: createdBy, employeeUuid: employeeUuid, expenseItemUuid: expenseItemUuid,
               incomingDate: incomingDate, incomingNumber: incomingNumber, paymentPurpose: paymentPurpose, vatSum: vatSum,
               commissionReportUuid: commissionReportUuid, customerOrderUuid: customerOrderUuid, factureOutUuid: factureOutUuid,
@@ -18,8 +17,7 @@ xml.paymentIn(readMode: readMode, changeMode: changeMode, updated: updated, upda
   xml.description_  description
 
   to_a(:attribute).each do |a|
-    xml.attribute(readMode: a.readMode, changeMode: a.changeMode, updated: a.updated, updatedBy: a.updatedBy,
-                  metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
+    xml.attribute(metadataUuid: a.metadataUuid, valueText: a.valueText, valueString: a.valueString,
                   doubleValue: a.doubleValue, longValue: a.longValue, booleanValue: a.booleanValue,
                   timeValue: a.timeValue, entityValueUuid: a.entityValueUuid, agentValueUuid: a.agentValueUuid,
                   goodValueUuid: a.goodValueUuid, placeValueUuid: a.placeValueUuid, consignmentValueUuid: a.consignmentValueUuid,
@@ -33,8 +31,7 @@ xml.paymentIn(readMode: readMode, changeMode: changeMode, updated: updated, upda
       xml.deleted_      a.deleted
 
       a.to_a(:file).each do |f|
-        xml.file(readMode: f.readMode, changeMode: f.changeMode, updated: f.updated, updatedBy: f.updatedBy, name: f.name,
-                 created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
+        xml.file(name: f.name, created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
           xml.accountUuid_  f.accountUuid
           xml.accountId_    f.accountId
@@ -51,9 +48,8 @@ xml.paymentIn(readMode: readMode, changeMode: changeMode, updated: updated, upda
   end
 
   to_a(:document) do |d|
-    xml.document(readMode: d.readMode, changeMode: d.changeMode, updated: d.updated, updatedBy: d.updatedBy, name: d.name,
-                 created: d.created, filename: d.filename, miniatureUuid: d.miniatureUuid, emailedDate: d.emailedDate,
-                 publicId: d.publicId, operationUuid: d.operationUuid) {
+    xml.document(name: d.name, created: d.created, filename: d.filename, miniatureUuid: d.miniatureUuid,
+                 emailedDate: d.emailedDate, publicId: d.publicId, operationUuid: d.operationUuid) {
       xml.accountUuid_  d.accountUuid
       xml.accountId_    d.accountId
       xml.uuid_         d.uuid
