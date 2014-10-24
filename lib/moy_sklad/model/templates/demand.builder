@@ -1,9 +1,8 @@
-xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid,
-           targetStoreUuid: targetStoreUuid, sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid,
-           contractUuid: contractUuid, moment: moment, targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid,
-           payerVat: payerVat, retailStoreUuid: retailStoreUuid, currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded,
-           employeeUuid: employeeUuid, factureInUuid: factureInUuid, incomingDate: incomingDate, incomingNumber: incomingNumber,
-           overheadDistribution: overheadDistribution, purchaseOrderUuid: purchaseOrderUuid) {
+xml.demand(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid, targetStoreUuid: targetStoreUuid,
+           sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid, contractUuid: contractUuid,
+           moment: moment, targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid, payerVat: payerVat,
+           retailStoreUuid: retailStoreUuid, currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded,
+           employeeUuid: employeeUuid, customerOrderUuid: customerOrderUuid, factureUuid: factureUuid) {
 
   xml.accountUuid_  accountUuid
   xml.accountId_    accountId
@@ -27,6 +26,7 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
       xml.uuid_         a.uuid
       xml.groupUuid_    a.groupUuid
       xml.deleted_      a.deleted
+
       a.to_a(:file).each do |f|
         xml.file(name: f.name, created: f.created, filename: f.filename, miniatureUuid: f.miniatureUuid) {
 
@@ -61,13 +61,11 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
 
   xml.sum(sum: sum.sum, sumInCurrency: sum.sumInCurrency)
 
-  xml.invoicesInUuid {
-    to_a(:invoicesInUuid).each do |r|
-      xml.invoiceInRef_ r
+  xml.invoicesOutUuid {
+    to_a(:invoicesOutUuid).each do |r|
+      xml.invoiceOutRef_ r
     end
   }
-
-  xml.overhead(sum: overhead.sum, sumInCurrency: overhead.sumInCurrency)
 
   xml.paymentsUuid {
     to_a(:paymentsUuid).each do |r|
@@ -75,15 +73,15 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     end
   }
 
-  to_a(:shipmentIn).each do |s|
-    xml.shipmentIn(discount: s.discount, quantity: s.quantity, goodPackUuid: s.goodPackUuid, consignmentUuid: s.consignmentUuid,
-                   goodUuid: s.goodUuid, slotUuid: s.slotUuid, vat: s.vat, countryUuid: s.countryUuid, gtdUuid: s.gtdUuid,
-                   overhead: s.overhead) {
+  to_a(:shipmentOut).each do |s|
+    xml.shipmentOut(discount: s.discount, quantity: s.quantity, goodPackUuid: s.goodPackUuid, consignmentUuid: s.consignmentUuid,
+                    goodUuid: s.goodUuid, slotUuid: s.slotUuid, vat: s.vat, countryUuid: s.countryUuid, gtdUuid: s.gtdUuid) {
 
       xml.accountUuid_  s.accountUuid
       xml.accountId_    s.accountId
       xml.uuid_         s.uuid
       xml.groupUuid_    s.groupUuid
+      xml.reserve_      s.reserve
 
       xml.basePrice(sum: s.basePrice.sum, sumInCurrency: s.basePrice.sumInCurrency)
       xml.price(sum: s.price.sum, sumInCurrency: s.price.sumInCurrency)
@@ -136,9 +134,14 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     }
   end
 
-  xml.purchaseReturnsUuid {
-    to_a(:purchaseReturnsUuid).each do |r|
-      xml.purchaseReturnRef r
+
+  xml.salesReturnsUuid {
+    to_a(:salesReturnsUuid).each do |r|
+      xml.salesReturnRef r
     end
   }
+
+  xml.extension(consigneeUuid: consigneeUuid, opened: opened, carrierUuid: carrierUuid, loadName: loadName,
+                consignorIndication: consignorIndication, transportFacility: transportFacility, goodPackQuantity: goodPackQuantity,
+                carNumber: carNumber)
 }

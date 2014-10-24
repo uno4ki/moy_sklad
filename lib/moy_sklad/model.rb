@@ -9,4 +9,5 @@ require 'moy_sklad/model/payment_in'
 require 'moy_sklad/model/custom_entity'
 require 'moy_sklad/model/country'
 require 'moy_sklad/model/supply'
+require 'moy_sklad/model/demand'
 
