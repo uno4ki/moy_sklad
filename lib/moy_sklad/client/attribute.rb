@@ -8,6 +8,10 @@ module MoySklad::Client
       def method_missing(meth, *args)
         MissingAttr.new
       end
+
+      def empty?
+        true
+      end
     end
   end
 

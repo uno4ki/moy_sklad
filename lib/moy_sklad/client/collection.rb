@@ -41,6 +41,8 @@ module MoySklad::Client
       @elements = [@elements] if @elements.is_a?(Hash)
       @metadata = HashWithIndifferentAccess.new(data[:data]['collection'])
 
+      @elements ||= []
+
       # Fix keys
       [:total, :start, :count].each do |k|
         @metadata[k] = @metadata[k].to_i if @metadata.has_key?(k)
