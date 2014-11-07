@@ -1,10 +1,10 @@
-xml.paymentIn(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid,
-              targetStoreUuid: targetStoreUuid, sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid,
-              contractUuid: contractUuid, moment: moment, targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid,
-              payerVat: payerVat, retailStoreUuid: retailStoreUuid, currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded,
-              employeeUuid: employeeUuid, expenseItemUuid: expenseItemUuid, incomingDate: incomingDate, incomingNumber: incomingNumber,
-              paymentPurpose: paymentPurpose, vatSum: vatSum, commissionReportUuid: commissionReportUuid, customerOrderUuid: customerOrderUuid,
-              factureOutUuid: factureOutUuid, invoiceOutUuid: invoiceOutUuid, purchaseReturnUuid: purchaseReturnUuid) {
+xml.cashIn(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, sourceAgentUuid: sourceAgentUuid, targetStoreUuid: targetStoreUuid,
+           sourceStoreUuid: sourceStoreUuid, applicable: applicable, projectUuid: projectUuid, contractUuid: contractUuid, moment: moment,
+           targetAccountUuid: targetAccountUuid, sourceAccountUuid: sourceAccountUuid, payerVat: payerVat, retailStoreUuid: retailStoreUuid,
+           currencyUuid: currencyUuid, rate: rate, vatIncluded: vatIncluded, employeeUuid: employeeUuid, expenseItemUuid: expenseItemUuid,
+           incomingDate: incomingDate, incomingNumber: incomingNumber, paymentPurpose: paymentPurpose, vatSum: vatSum,
+           commissionReportUuid: commissionReportUuid, customerOrderUuid: customerOrderUuid, factureOutUuid: factureOutUuid,
+           invoiceOutUuid: invoiceOutUuid, purchaseReturnUuid: purchaseReturnUuid) {
 
   xml.accountUuid_  accountUuid
   xml.accountId_    accountId
