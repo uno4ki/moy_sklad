@@ -7,7 +7,7 @@ module MoySklad::Model
       if v.nil?
         create_price(type, value)
       else
-        v.value = value.to_f * 100
+        v.value = value.to_i
       end
     end
 
@@ -20,7 +20,7 @@ module MoySklad::Model
 
     def create_price(type, value)
       options = { currencyUuid: MoySklad.configuration.currency,
-                  priceTypeUuid: type, value: value.to_f * 100 }
+                  priceTypeUuid: type, value: value.to_i }
       p = create_and_load_resource('Price', options)
       if self.salePrices.price.is_a?(MoySklad::Client::Attribute::MissingAttr)
         self.salePrices.price = [p]
