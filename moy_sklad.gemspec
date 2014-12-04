@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['i.have@no.mail', 'sergey.zyablitsky@gmail.com']
   spec.description   = 'MoySklad API'
   spec.summary       = 'MoySklad API wrapper'
-  spec.homepage      = 'https://github.com/uno4ki/moy_sklad'
+  spec.homepage      = 'https://github.com/the-furnish/moy_sklad'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
