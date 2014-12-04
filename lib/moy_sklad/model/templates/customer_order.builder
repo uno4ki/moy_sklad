@@ -69,22 +69,22 @@ xml.customerOrder(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgent
   }
 
   xml.invoicesOutUuid {
-    to_a(:invoicesOutUuid).each do |r|
+    invoicesOutUuid.to_a(:invoiceOutRef).each do |r|
       xml.invoiceOutRef_ r
     end
-  }
+  } unless invoicesOutUuid.empty?
 
   xml.paymentsUuid {
-    to_a(:paymentsUuid).each do |r|
-      xml.financeInRef r
+    paymentsUuid.to_a(:financeInRef).each do |r|
+      xml.financeInRef_ r
     end
-  }
+  } unless paymentsUuid.empty?
 
   xml.purchaseOrdersUuid {
-    to_a(:purchaseOrdersUuid).each do |r|
-      xml.purchaseOrderRef r
+    purchaseOrdersUuid.to_a(:purchaseOrderRef).each do |r|
+      xml.purchaseOrderRef_ r
     end
-  }
+  } unless purchaseOrdersUuid.empty?
 
 
   to_a(:customerOrderPosition).each do |o|

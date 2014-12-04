@@ -64,8 +64,8 @@ xml.cashIn(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
   xml.sum(sum: sum.sum, sumInCurrency: sum.sumInCurrency)
 
   xml.demandsUuid {
-    to_a(:demandsUuid).each do |r|
+    demandsUuid.to_a(:demandRef).each do |r|
       xml.demandRef_ r
     end
-  }
+  } unless demandsUuid.empty?
 }

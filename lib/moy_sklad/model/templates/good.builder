@@ -43,12 +43,14 @@ xml.good(name: name, archived: archived, parentUuid: parentUuid, productCode: pr
     }
   end
 
-  xml.barcode(barcode: barcode.barcode, barcodeType: barcode.barcodeType) {
-    xml.accountUuid_  barcode.accountUuid
-    xml.accountId_    barcode.accountId
-    xml.uuid_         barcode.uuid
-    xml.groupUuid_    barcode.groupUuid
-  } unless xml.barcode.empty?
+  to_a(:barcode).each do |barcode|
+    xml.barcode(barcode: barcode.barcode, barcodeType: barcode.barcodeType) {
+      xml.accountUuid_  barcode.accountUuid
+      xml.accountId_    barcode.accountId
+      xml.uuid_         barcode.uuid
+      xml.groupUuid_    barcode.groupUuid
+    }
+  end
 
   xml.salePrices {
     salePrices.to_a(:price).each do |p|
