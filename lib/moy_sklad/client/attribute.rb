@@ -12,6 +12,10 @@ module MoySklad::Client
       def empty?
         true
       end
+
+      def present?
+        false
+      end
     end
   end
 
