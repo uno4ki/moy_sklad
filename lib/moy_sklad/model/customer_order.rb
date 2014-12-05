@@ -1,6 +1,5 @@
 module MoySklad::Model
   class CustomerOrder < MoySklad::Client::Base
-
     def initialize(*args)
       super(*args)
       create_nested_collection(:customerOrderPosition)
