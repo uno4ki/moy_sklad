@@ -65,7 +65,7 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     invoicesInUuid.to_a(:invoiceInRef).each do |r|
       xml.invoiceInRef_ r
     end
-  } unless invoicesInUuid.empty?
+  } if invoicesInUuid.present?
 
   xml.overhead(sum: overhead.sum, sumInCurrency: overhead.sumInCurrency)
 
@@ -73,7 +73,7 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     paymentsUuid.to_a(:financeInRef).each do |r|
       xml.financeInRef_ r
     end
-  } unless paymentsUuid.empty?
+  } if paymentsUuid.present?
 
   to_a(:shipmentIn).each do |s|
     xml.shipmentIn(discount: s.discount, quantity: s.quantity, goodPackUuid: s.goodPackUuid, consignmentUuid: s.consignmentUuid,
@@ -140,5 +140,5 @@ xml.supply(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     purchaseReturnsUuid.to_a(:purchaseReturnRef).each do |r|
       xml.purchaseReturnRef_ r
     end
-  } unless purchaseReturnsUuid.empty?
+  } if purchaseReturnsUuid.present?
 }

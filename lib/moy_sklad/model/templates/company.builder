@@ -56,8 +56,8 @@ xml.company(name: name,  discount: discount, autoDiscount: autoDiscount, discoun
       xml.uuid_         requisite.bankAccount.uuid
       xml.groupUuid_    requisite.bankAccount.groupUuid
       xml.deleted_      requisite.bankAccount.deleted
-    } unless requisite.bankAccount.empty?
-  } unless requisite.empty?
+    } if requisite.bankAccount.present?
+  } if requisite.present?
 
   to_a(:bankAccount).each do |b|
       xml.bankAccount(accountNumber: b.accountNumber, bankLocation: b.bankLocation, bankName: b.bankName, bic: b.bic,

@@ -65,13 +65,13 @@ xml.demand(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     invoicesOutUuid.to_a(:invoiceOutRef).each do |r|
       xml.invoiceOutRef_ r
     end
-  } unless invoicesOutUuid.empty?
+  } if invoicesOutUuid.present?
 
   xml.paymentsUuid {
     paymentsUuid.to_a(:financeInRef).each do |r|
       xml.financeInRef_ r
     end
-  } unless paymentsUuid.empty?
+  } if paymentsUuid.present?
 
   to_a(:shipmentOut).each do |s|
     xml.shipmentOut(discount: s.discount, quantity: s.quantity, goodPackUuid: s.goodPackUuid, consignmentUuid: s.consignmentUuid,
@@ -139,7 +139,7 @@ xml.demand(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgentUuid, s
     salesReturnsUuid.to_a(:salesReturnRef).each do |r|
       xml.salesReturnRef_ r
     end
-  } unless salesReturnsUuid.empty?
+  } if salesReturnsUuid.present?
 
   xml.extension(consigneeUuid: consigneeUuid, opened: opened, carrierUuid: carrierUuid, loadName: loadName,
                 consignorIndication: consignorIndication, transportFacility: transportFacility, goodPackQuantity: goodPackQuantity,
