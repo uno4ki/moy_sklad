@@ -12,7 +12,7 @@ module MoySklad::Client
 
     def decode(_data)
       data = Hash.from_xml(_data)
-      fail MoySklad::BadApiResponseError unless data
+      fail MoySklad::BadApiResponse unless data
 
       if data.has_key?('collection')
         collection(data)

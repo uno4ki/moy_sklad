@@ -1,4 +1,4 @@
 module MoySklad
   class BaseError < RuntimeError; end
-  class BadApiResponseError < BaseError; end
+  class BadApiResponse < BaseError; end
 end
