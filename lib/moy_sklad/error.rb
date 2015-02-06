@@ -1,2 +1,4 @@
-require 'moy_sklad/error/base'
-require 'moy_sklad/error/bad_api_response'
+module MoySklad
+  class BaseError < RuntimeError; end
+  class BadApiResponseError < BaseError; end
+end
