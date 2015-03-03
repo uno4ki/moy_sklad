@@ -36,6 +36,8 @@ module MoySklad::Client
     attr_reader :metadata
 
     def initialize(data)
+      fail MoySklad::BadApiResponseError unless data
+      fail MoySklad::BadApiResponseError unless data[:data]
 
       @elements = data[:data]['collection'].delete(data[:object])
       @elements = [@elements] if @elements.is_a?(Hash)
