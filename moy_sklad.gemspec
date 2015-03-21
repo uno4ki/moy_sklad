@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.3'
   spec.add_development_dependency 'rspec', '~> 3.1'
 
-  spec.add_dependency 'activesupport', '>= 3.2', '<= 4.2'
-  spec.add_dependency 'activeresource', '>= 3.2', '<= 4.2'
+  spec.add_dependency 'activesupport', '>= 3.2', '<= 4.2.1'
+  spec.add_dependency 'activeresource', '>= 3.2', '<= 4.2.1'
   spec.add_dependency 'nokogiri', '~> 1.6'
 end
