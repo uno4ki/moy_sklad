@@ -1,5 +1,5 @@
 module MoySklad
   class BaseError < RuntimeError; end
-  class BadApiResponse < BaseError; end
-  class EmptyCollection < BaseError; end
+  class BadApiResponse < MoySklad::BaseError; end
+  class EmptyCollection < MoySklad::BaseError; end
 end
