@@ -38,6 +38,7 @@ module MoySklad::Client
     def initialize(data)
       fail MoySklad::BadApiResponseError unless data
       fail MoySklad::BadApiResponseError unless data[:data]
+      fail MoySklad::BadApiResponseError unless data[:data]['collection']
 
       @elements = data[:data]['collection'].delete(data[:object])
       @elements = [@elements] if @elements.is_a?(Hash)
