@@ -8,11 +8,8 @@ module MoySklad::Client
     self.user = MoySklad.configuration.user_name
     self.password = MoySklad.configuration.password
     self.auth_type = :basic
-
-    if ActiveResource::VERSION::STRING >= '4.0.0'
-      self.include_format_in_path = false
-      self.collection_parser = Collection
-    end
+    self.include_format_in_path = false
+    self.collection_parser = Collection
 
     @@template_path = File.join(File.dirname(__FILE__), '..', 'model', 'templates')
 
@@ -40,33 +37,15 @@ module MoySklad::Client
       def collection_name
         @collection_name ||= "#{element_name.classify}/list"
       end
-
-      if ActiveResource::VERSION::STRING < '4.0.0'
-        def collection_path(prefix_options = {}, query_options = nil)
-          check_prefix_options(prefix_options)
-          prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-          "#{prefix(prefix_options)}#{collection_name}#{query_string(query_options)}"
-        end
-      end
     end
 
     # Override create method, this required because moysklad uses PUT instead of POST
-    if ActiveResource::VERSION::STRING < '4.0.0'
-      def create
-        _create
-      end
+    def create
+      run_callbacks :create do _create end
+    end
 
-      def destroy
-        _destroy
-      end
-    else
-      def create
-        run_callbacks :create do _create end
-      end
-
-      def destroy
-        run_callbacks :destroy do _destroy end
-      end
+    def destroy
+      run_callbacks :destroy do _destroy end
     end
 
     def save
