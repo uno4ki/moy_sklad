@@ -68,17 +68,11 @@ module MoySklad
       MoySklad::Client::Base.warehouse_url = @warehouse_url = v
     end
 
-    # Currency UUID.
-    # @attr value [String] defaults to
-    # `'131bf5ff-1ee5-11e4-67ed-002590a28eca'`
-    attr_accessor :currency
-
     def initialize
       @user_name = ''
       @password = ''
       @base_url = 'https://online.moysklad.ru/exchange/rest/ms/xml'
       @warehouse_url = 'https://online.moysklad.ru/exchange/rest/stock/xml'
-      @currency = '131bf5ff-1ee5-11e4-67ed-002590a28eca'
     end
   end
 end

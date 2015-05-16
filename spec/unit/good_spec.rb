@@ -78,7 +78,7 @@ describe 'Good' do
         item = MoySklad::Model::Good.new
         item.name = "Test item with custom prices"
 
-        item.set_sale_price(PRICE_CUR, 100)
+        item.set_sale_price(PRICE_CUR, 100, CURRENCY_CUR)
 
         item.save
         @uuid = item.uuid
@@ -96,7 +96,7 @@ describe 'Good' do
       it "and update CUR price (only default price can be updated)" do
         item = MoySklad::Model::Good.find(@uuid)
 
-        item.set_sale_price(PRICE_CUR, 1000)
+        item.set_sale_price(PRICE_CUR, 1000, CURRENCY_CUR)
         expect(item.save).to eq(true)
 
         expect(item.get_sale_price(PRICE_CUR).value.to_f / 100).to eq(1000)
@@ -145,5 +145,4 @@ describe 'Good' do
 
     end
   end
-
 end

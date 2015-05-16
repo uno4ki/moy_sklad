@@ -4,6 +4,8 @@ TGT_AGENT = "uuid"
 SRC_STORE = "uuid"
 SRC_AGENT = "uuid"
 
+CURRENCY_CUR = "uuid"
+
 # Some known items from MS
 KNOWN_ITEMS = {
   "uuid" => {quantity: 2, name: "Библиотека открытая", price: 142560},

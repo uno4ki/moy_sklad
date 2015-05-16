@@ -1,11 +1,11 @@
 module MoySklad::Model
   class Good < MoySklad::Client::Base
-    def set_sale_price(type, value)
+    def set_sale_price(type, value, currency)
       create_nested_resource(:salePrices)
 
       v = self.salePrices.find_object(:price, :priceTypeUuid, type)
       if v.nil?
-        create_price(type, value)
+        create_price(type, value, currency)
       else
         v.value = value.to_i
       end
@@ -18,9 +18,8 @@ module MoySklad::Model
 
     private
 
-    def create_price(type, value)
-      options = { currencyUuid: MoySklad.configuration.currency,
-                  priceTypeUuid: type, value: value.to_i }
+    def create_price(type, value, currency)
+      options = { currencyUuid: currency, priceTypeUuid: type, value: value.to_i }
       p = create_and_load_resource('Price', options)
       if self.salePrices.price.is_a?(MoySklad::Client::Attribute::MissingAttr)
         self.salePrices.price = [p]
