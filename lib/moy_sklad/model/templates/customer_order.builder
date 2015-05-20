@@ -66,7 +66,7 @@ xml.customerOrder(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgent
     to_a(:demandsUuid).each do |r|
       xml.demandRef_ r
     end
-  }
+  } if demandsUuid.present?
 
   xml.invoicesOutUuid {
     invoicesOutUuid.to_a(:invoiceOutRef).each do |r|
