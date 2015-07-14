@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<currency readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" enteredRate="1.051732E7" invertRate="true" rate="1.051732E7">
+  <!--Optional:-->
+  <accountUuid>string</accountUuid>
+  <!--Optional:-->
+  <accountId>string</accountId>
+  <!--Optional:-->
+  <uuid>string</uuid>
+  <!--Optional:-->
+  <groupUuid>string</groupUuid>
+  <!--Optional:-->
+  <deleted>2006-08-19T19:27:14+02:00</deleted>
+  <!--Optional:-->
+  <code>string</code>
+  <!--Optional:-->
+  <externalcode>string</externalcode>
+  <!--Optional:-->
+  <description>string</description>
+  <!--Optional:-->
+  <major s1="string" s24="string" s5="string" sex="5"/>
+  <!--Optional:-->
+  <minor s1="string" s24="string" s5="string" sex="5"/>
+</currency>
