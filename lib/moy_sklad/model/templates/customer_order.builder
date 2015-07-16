@@ -90,7 +90,7 @@ xml.customerOrder(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgent
   to_a(:customerOrderPosition).each do |o|
     xml.customerOrderPosition(discount: o.discount, quantity: o.quantity,
                               goodPackUuid: o.goodPackUuid, consignmentUuid: o.consignmentUuid, goodUuid: o.goodUuid,
-                              slotUuid: o.slotUuid, vat: o.var) {
+                              slotUuid: o.slotUuid, vat: o.vat) {
       xml.accountUuid_  o.accountUuid
       xml.accountId_    o.accountId
       xml.uuid_         o.uuid
@@ -100,7 +100,7 @@ xml.customerOrder(name: name, stateUuid: stateUuid, targetAgentUuid: targetAgent
       xml.basePrice(sum: o.basePrice.sum, sumInCurrency: o.basePrice.sumInCurrency)
       xml.price(sum: o.price.sum, sumInCurrency: o.price.sumInCurrency)
 
-      xml.thins {
+      xml.things {
         o.to_a(:thingRef).each do |t|
           xml.thingRef(name: t.name, goodUuid: t.goodUuid) {
 
