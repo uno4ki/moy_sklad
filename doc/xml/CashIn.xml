@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<paymentIn readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" stateUuid="string" targetAgentUuid="string" sourceAgentUuid="string" targetStoreUuid="string" sourceStoreUuid="string" applicable="true" projectUuid="string" contractUuid="string" moment="2006-08-19T19:27:14+02:00" targetAccountUuid="string" sourceAccountUuid="string" payerVat="false" retailStoreUuid="string" currencyUuid="string" rate="1.051732E7" vatIncluded="true" created="2017-05-15T08:41:13" createdBy="string" expenseItemUuid="string" incomingDate="2013-12-21T12:32:42+01:00" incomingNumber="string" paymentPurpose="string" vatSum="1.051732E7" commissionReportUuid="string" customerOrderUuid="string" factureOutUuid="string" invoiceOutUuid="string" purchaseReturnUuid="string">
+<cashIn readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" stateUuid="string" targetAgentUuid="string" sourceAgentUuid="string" targetStoreUuid="string" sourceStoreUuid="string" applicable="true" projectUuid="string" contractUuid="string" moment="2006-08-19T19:27:14+02:00" targetAccountUuid="string" sourceAccountUuid="string" payerVat="false" retailStoreUuid="string" currencyUuid="string" rate="1.051732E7" vatIncluded="true" created="2017-05-15T08:41:13" createdBy="string" expenseItemUuid="string" incomingDate="2013-12-21T12:32:42+01:00" incomingNumber="string" paymentPurpose="string" vatSum="1.051732E7" commissionReportUuid="string" customerOrderUuid="string" factureOutUuid="string" invoiceOutUuid="string" purchaseReturnUuid="string">
   <!--Optional:-->
   <accountUuid>string</accountUuid>
   <!--Optional:-->
@@ -94,4 +94,4 @@
     <!--Zero or more repetitions:-->
     <demandRef>string</demandRef>
   </demandsUuid>
-</paymentIn>
+</cashIn>

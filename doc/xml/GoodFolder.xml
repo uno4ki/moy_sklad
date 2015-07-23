@@ -9,7 +9,11 @@
   <!--Optional:-->
   <groupUuid>string</groupUuid>
   <!--Optional:-->
-  <deleted>2006-08-19T19:27:14+02:00</deleted>
+  <ownerUid>string</ownerUid>
+  <!--Optional:-->
+  <shared>true</shared>
+  <!--Optional:-->
+  <deleted>2018-11-01T06:36:46+01:00</deleted>
   <!--Optional:-->
   <code>string</code>
   <!--Optional:-->
@@ -17,7 +21,7 @@
   <!--Optional:-->
   <description>string</description>
   <!--Zero or more repetitions:-->
-  <attribute readMode="NEIGHBOUR" changeMode="ALL" updated="2017-05-15T08:41:13" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2012-09-13T15:00:34+02:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" goodUuid="string">
+  <attribute readMode="ALL" changeMode="NEIGHBOUR" updated="2003-08-09T02:18:37+02:00" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2002-06-24T17:46:32+02:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" goodUuid="string">
     <!--Optional:-->
     <accountUuid>string</accountUuid>
     <!--Optional:-->
@@ -27,9 +31,13 @@
     <!--Optional:-->
     <groupUuid>string</groupUuid>
     <!--Optional:-->
-    <deleted>2009-10-14T09:16:36</deleted>
+    <ownerUid>string</ownerUid>
     <!--Optional:-->
-    <file readMode="PARENT" changeMode="NONE" updated="2014-10-27T10:44:59" updatedBy="string" name="string" created="2013-06-17T19:14:58" filename="string" miniatureUuid="string">
+    <shared>true</shared>
+    <!--Optional:-->
+    <deleted>2012-01-07T20:42:56</deleted>
+    <!--Optional:-->
+    <file readMode="ALL" changeMode="ALL" updated="2018-02-04T15:35:59+01:00" updatedBy="string" name="string" created="2002-11-16T10:03:57+01:00" filename="string" miniatureUuid="string">
       <!--Optional:-->
       <accountUuid>string</accountUuid>
       <!--Optional:-->
@@ -39,7 +47,11 @@
       <!--Optional:-->
       <groupUuid>string</groupUuid>
       <!--Optional:-->
-      <deleted>2005-09-12T10:55:02+02:00</deleted>
+      <ownerUid>string</ownerUid>
+      <!--Optional:-->
+      <shared>false</shared>
+      <!--Optional:-->
+      <deleted>2006-11-29T18:20:00</deleted>
       <!--Optional:-->
       <code>string</code>
       <!--Optional:-->
@@ -47,7 +59,7 @@
       <!--Optional:-->
       <description>string</description>
       <!--Optional:-->
-      <contents>Y2FlbHVtcXVl</contents>
+      <contents>YXJpcw==</contents>
     </file>
   </attribute>
 </goodFolder>

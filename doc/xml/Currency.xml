@@ -9,7 +9,11 @@
   <!--Optional:-->
   <groupUuid>string</groupUuid>
   <!--Optional:-->
-  <deleted>2006-08-19T19:27:14+02:00</deleted>
+  <ownerUid>string</ownerUid>
+  <!--Optional:-->
+  <shared>true</shared>
+  <!--Optional:-->
+  <deleted>2018-11-01T06:36:46+01:00</deleted>
   <!--Optional:-->
   <code>string</code>
   <!--Optional:-->

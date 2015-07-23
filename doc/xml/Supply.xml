@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<customerOrder readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" stateUuid="string" targetAgentUuid="string" sourceAgentUuid="string" targetStoreUuid="string" sourceStoreUuid="string" applicable="true" projectUuid="string" contractUuid="string" moment="2006-08-19T19:27:14+02:00" targetAccountUuid="string" sourceAccountUuid="string" payerVat="false" retailStoreUuid="string" currencyUuid="string" rate="1.051732E7" vatIncluded="true" created="2017-05-15T08:41:13" createdBy="string" deliveryPlannedMoment="2013-12-21T12:32:42+01:00" reservedSum="1.051732E7">
+<supply readMode="NONE" changeMode="NEIGHBOUR" updated="2013-11-23T15:44:07" updatedBy="string" name="string" stateUuid="string" targetAgentUuid="string" sourceAgentUuid="string" targetStoreUuid="string" sourceStoreUuid="string" applicable="true" projectUuid="string" contractUuid="string" moment="2006-08-19T19:27:14+02:00" targetAccountUuid="string" sourceAccountUuid="string" payerVat="false" retailStoreUuid="string" currencyUuid="string" rate="1.051732E7" vatIncluded="true" created="2017-05-15T08:41:13" createdBy="string" factureInUuid="string" incomingDate="2013-12-21T12:32:42+01:00" incomingNumber="string" overheadDistribution="BY_PRICE" purchaseOrderUuid="string">
   <!--Optional:-->
   <accountUuid>string</accountUuid>
   <!--Optional:-->
@@ -13,7 +13,7 @@
   <!--Optional:-->
   <shared>false</shared>
   <!--Optional:-->
-  <deleted>2009-10-14T09:16:36</deleted>
+  <deleted>2016-02-20T15:56:29+01:00</deleted>
   <!--Optional:-->
   <code>string</code>
   <!--Optional:-->
@@ -21,7 +21,7 @@
   <!--Optional:-->
   <description>string</description>
   <!--Zero or more repetitions:-->
-  <attribute readMode="PARENT" changeMode="NONE" updated="2014-10-27T10:44:59" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2017-11-01T09:15:53+01:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" operationUuid="string">
+  <attribute readMode="NONE" changeMode="ALL" updated="2018-12-28T20:51:14+01:00" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2002-11-16T10:03:57+01:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" operationUuid="string">
     <!--Optional:-->
     <accountUuid>string</accountUuid>
     <!--Optional:-->
@@ -35,9 +35,9 @@
     <!--Optional:-->
     <shared>false</shared>
     <!--Optional:-->
-    <deleted>2000-09-14T10:07:34</deleted>
+    <deleted>2006-11-29T18:20:00</deleted>
     <!--Optional:-->
-    <file readMode="NEIGHBOUR" changeMode="NONE" updated="2000-09-25T08:18:09" updatedBy="string" name="string" created="2015-11-05T05:47:14" filename="string" miniatureUuid="string">
+    <file readMode="NONE" changeMode="ALL" updated="2015-06-18T00:07:00+02:00" updatedBy="string" name="string" created="2000-04-21T02:36:55+02:00" filename="string" miniatureUuid="string">
       <!--Optional:-->
       <accountUuid>string</accountUuid>
       <!--Optional:-->
@@ -49,9 +49,9 @@
       <!--Optional:-->
       <ownerUid>string</ownerUid>
       <!--Optional:-->
-      <shared>false</shared>
+      <shared>true</shared>
       <!--Optional:-->
-      <deleted>2017-04-19T16:38:57+02:00</deleted>
+      <deleted>2012-04-24T23:37:57+02:00</deleted>
       <!--Optional:-->
       <code>string</code>
       <!--Optional:-->
@@ -59,11 +59,11 @@
       <!--Optional:-->
       <description>string</description>
       <!--Optional:-->
-      <contents>ZmV0YQ==</contents>
+      <contents>YWM=</contents>
     </file>
   </attribute>
   <!--Zero or more repetitions:-->
-  <document readMode="NEIGHBOUR" changeMode="NONE" updated="2011-12-25T03:49:17" updatedBy="string" name="string" created="2015-10-10T12:07:56+02:00" filename="string" miniatureUuid="string" emailedDate="2018-07-19T10:02:25+02:00" publicId="string" operationUuid="string">
+  <document readMode="NONE" changeMode="PARENT" updated="2013-08-23T01:50:52" updatedBy="string" name="string" created="2016-02-07T19:34:15+01:00" filename="string" miniatureUuid="string" emailedDate="2009-04-09T23:42:38" publicId="string" operationUuid="string">
     <!--Optional:-->
     <accountUuid>string</accountUuid>
     <!--Optional:-->
@@ -77,7 +77,7 @@
     <!--Optional:-->
     <shared>true</shared>
     <!--Optional:-->
-    <deleted>2000-08-23T02:34:44</deleted>
+    <deleted>2011-06-03T21:00:00</deleted>
     <!--Optional:-->
     <code>string</code>
     <!--Optional:-->
@@ -85,27 +85,24 @@
     <!--Optional:-->
     <description>string</description>
     <!--Optional:-->
-    <contents>bWFnbm8=</contents>
+    <contents>ZXQ=</contents>
   </document>
   <!--Optional:-->
   <sum sum="1.051732E7" sumInCurrency="1.051732E7"/>
   <!--Optional:-->
-  <demandsUuid>
+  <invoicesInUuid>
     <!--Zero or more repetitions:-->
-    <demandRef>string</demandRef>
-  </demandsUuid>
+    <invoiceInRef>string</invoiceInRef>
+  </invoicesInUuid>
   <!--Optional:-->
-  <invoicesOutUuid>
-    <!--Zero or more repetitions:-->
-    <invoiceOutRef>string</invoiceOutRef>
-  </invoicesOutUuid>
+  <overhead sum="1.051732E7" sumInCurrency="1.051732E7"/>
   <!--Optional:-->
   <paymentsUuid>
     <!--Zero or more repetitions:-->
-    <financeInRef>string</financeInRef>
+    <financeOutRef>string</financeOutRef>
   </paymentsUuid>
   <!--Zero or more repetitions:-->
-  <customerOrderPosition readMode="NEIGHBOUR" changeMode="NEIGHBOUR" discount="1.051732E7" quantity="1.051732E7" goodPackUuid="string" consignmentUuid="string" goodUuid="string" slotUuid="string" vat="10">
+  <shipmentIn readMode="NEIGHBOUR" changeMode="SELF" discount="1.051732E7" quantity="1.051732E7" goodPackUuid="string" consignmentUuid="string" goodUuid="string" slotUuid="string" vat="10" countryUuid="string" gtdUuid="string" overhead="1.051732E7">
     <!--Optional:-->
     <accountUuid>string</accountUuid>
     <!--Optional:-->
@@ -117,7 +114,7 @@
     <!--Optional:-->
     <ownerUid>string</ownerUid>
     <!--Optional:-->
-    <shared>false</shared>
+    <shared>true</shared>
     <!--Optional:-->
     <basePrice sum="1.051732E7" sumInCurrency="1.051732E7"/>
     <!--Optional:-->
@@ -125,7 +122,7 @@
     <!--Optional:-->
     <things>
       <!--Zero or more repetitions:-->
-      <thingRef readMode="NEIGHBOUR" changeMode="ALL" updated="2008-02-06T14:51:05+01:00" updatedBy="string" name="string" goodUuid="string">
+      <thingRef readMode="ALL" changeMode="NONE" updated="2019-03-02T07:02:08" updatedBy="string" name="string" goodUuid="string">
         <!--Optional:-->
         <accountUuid>string</accountUuid>
         <!--Optional:-->
@@ -137,9 +134,9 @@
         <!--Optional:-->
         <ownerUid>string</ownerUid>
         <!--Optional:-->
-        <shared>true</shared>
+        <shared>false</shared>
         <!--Optional:-->
-        <deleted>2018-04-13T20:36:55</deleted>
+        <deleted>2002-11-05T09:30:58</deleted>
         <!--Optional:-->
         <code>string</code>
         <!--Optional:-->
@@ -147,7 +144,7 @@
         <!--Optional:-->
         <description>string</description>
         <!--Zero or more repetitions:-->
-        <attribute readMode="PARENT" changeMode="PARENT" updated="2001-07-25T23:15:31" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="true" timeValue="2001-08-29T11:32:42+02:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" thingUuid="string">
+        <attribute readMode="PARENT" changeMode="SELF" updated="2017-10-14T14:43:21" updatedBy="string" metadataUuid="string" valueText="string" valueString="string" doubleValue="1.051732E7" longValue="10" booleanValue="false" timeValue="2008-11-07T03:50:41+01:00" entityValueUuid="string" agentValueUuid="string" goodValueUuid="string" placeValueUuid="string" consignmentValueUuid="string" contractValueUuid="string" projectValueUuid="string" employeeValueUuid="string" thingUuid="string">
           <!--Optional:-->
           <accountUuid>string</accountUuid>
           <!--Optional:-->
@@ -159,11 +156,11 @@
           <!--Optional:-->
           <ownerUid>string</ownerUid>
           <!--Optional:-->
-          <shared>false</shared>
+          <shared>true</shared>
           <!--Optional:-->
-          <deleted>2019-05-04T05:54:29</deleted>
+          <deleted>2015-07-31T16:52:59+02:00</deleted>
           <!--Optional:-->
-          <file readMode="ALL" changeMode="NONE" updated="2006-08-04T12:16:57" updatedBy="string" name="string" created="2013-07-07T10:43:40+02:00" filename="string" miniatureUuid="string">
+          <file readMode="NONE" changeMode="PARENT" updated="2014-07-20T23:42:06+02:00" updatedBy="string" name="string" created="2005-05-29T11:30:53+02:00" filename="string" miniatureUuid="string">
             <!--Optional:-->
             <accountUuid>string</accountUuid>
             <!--Optional:-->
@@ -177,7 +174,7 @@
             <!--Optional:-->
             <shared>false</shared>
             <!--Optional:-->
-            <deleted>2016-06-29T01:30:01</deleted>
+            <deleted>2010-01-19T12:43:56</deleted>
             <!--Optional:-->
             <code>string</code>
             <!--Optional:-->
@@ -185,16 +182,15 @@
             <!--Optional:-->
             <description>string</description>
             <!--Optional:-->
-            <contents>dmFzdG8=</contents>
+            <contents>bW9udGlz</contents>
           </file>
         </attribute>
       </thingRef>
     </things>
-    <reserve>1.051732E7</reserve>
-  </customerOrderPosition>
+  </shipmentIn>
   <!--Optional:-->
-  <purchaseOrdersUuid>
+  <purchaseReturnsUuid>
     <!--Zero or more repetitions:-->
-    <purchaseOrderRef>string</purchaseOrderRef>
-  </purchaseOrdersUuid>
-</customerOrder>
+    <purchaseReturnRef>string</purchaseReturnRef>
+  </purchaseReturnsUuid>
+</supply>
