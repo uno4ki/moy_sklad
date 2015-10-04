@@ -22,7 +22,7 @@ module MoySklad::Model
     end
 
     def add_barcode(code, options)
-      barcode = create_and_load_resource("barcode", options)
+      barcode = create_and_load_resource("barcode", {barcode: code}.merge(options))
       if to_a(:barcode).empty?
         self.barcode = [barcode]
       else
