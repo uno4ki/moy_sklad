@@ -53,6 +53,10 @@ module MoySklad::Client
       self.error.is_a?(MoySklad::Client::Attribute::MissingAttr)
     end
 
+    def applicable?
+      applicable.to_s == 'true'
+    end
+
     private
 
     def _create
