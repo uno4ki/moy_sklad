@@ -1,3 +1,7 @@
+# This shit is obsolete ! :D
+
+I'm so happy about this :)
+
 [![Gem Version](https://badge.fury.io/rb/moy_sklad.svg)](http://badge.fury.io/rb/moy_sklad)
 
 # MoySklad
